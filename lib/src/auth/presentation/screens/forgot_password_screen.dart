@@ -1,15 +1,15 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ecommerce_admin_app/core/app/resources/colours.dart';
+import 'package:ecommerce_admin_app/core/app/resources/fonts.dart';
+import 'package:ecommerce_admin_app/core/app/resources/media_res.dart';
+import 'package:ecommerce_admin_app/core/app/utils/core_utils.dart';
 import 'package:ecommerce_admin_app/core/app/widgets/gradient_background.dart';
 import 'package:ecommerce_admin_app/core/app/widgets/rounded_button.dart';
-import 'package:ecommerce_admin_app/core/resources/colors.dart';
-import 'package:ecommerce_admin_app/core/resources/fonts.dart';
-import 'package:ecommerce_admin_app/core/resources/media_res.dart';
 import 'package:ecommerce_admin_app/core/services/dependency_injection.dart';
-import 'package:ecommerce_admin_app/core/utils/core_utils.dart';
 import 'package:ecommerce_admin_app/src/auth/presentation/bloc/auth_bloc.dart';
 import 'package:ecommerce_admin_app/src/auth/presentation/screens/forms/forgot_password_form.dart';
 import 'package:ecommerce_admin_app/src/auth/presentation/screens/sign_in_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});

@@ -1,4 +1,4 @@
-import 'package:ecommerce_admin_app/core/utils/typedef.dart';
+import 'package:ecommerce_admin_app/core/app/utils/typedef.dart';
 import 'package:ecommerce_admin_app/src/auth/domain/entities/local_user.dart';
 
 class LocalUserModel extends LocalUser{
@@ -14,7 +14,7 @@ class LocalUserModel extends LocalUser{
 
   const LocalUserModel.empty() : super.empty();
 
-  LocalUserModel.fromMap(DataMap map) : super(
+  LocalUserModel.fromMap(SDMap map) : super(
     uid:  map['uid'] as String,
     email: map['email'] as String,
     name: map['name'] as String,
@@ -45,7 +45,7 @@ class LocalUserModel extends LocalUser{
     );
   }
 
-  DataMap toMap(){
+  SDMap toMap(){
     return {
       'uid' : uid,
       'email' : email,
@@ -57,7 +57,7 @@ class LocalUserModel extends LocalUser{
     };
   }
 
-  DataMap toMapLocal(){
+  SDMap toMapLocal(){
     return {
       'uid' : uid,
       'email' : email,

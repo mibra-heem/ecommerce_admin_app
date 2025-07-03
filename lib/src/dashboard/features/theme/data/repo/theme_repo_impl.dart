@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
+import 'package:ecommerce_admin_app/core/app/utils/typedef.dart';
 import 'package:ecommerce_admin_app/core/errors/exception.dart';
 import 'package:ecommerce_admin_app/core/errors/failure.dart';
-import 'package:ecommerce_admin_app/core/utils/typedef.dart';
 import 'package:ecommerce_admin_app/src/dashboard/features/theme/data/datasource/theme_local_data_src.dart';
 import 'package:ecommerce_admin_app/src/dashboard/features/theme/domain/repo/theme_repo.dart';
 

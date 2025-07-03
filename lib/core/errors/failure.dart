@@ -1,5 +1,5 @@
-import 'package:equatable/equatable.dart';
 import 'package:ecommerce_admin_app/core/errors/exception.dart';
+import 'package:equatable/equatable.dart';
 
 abstract class Failure extends Equatable{
 

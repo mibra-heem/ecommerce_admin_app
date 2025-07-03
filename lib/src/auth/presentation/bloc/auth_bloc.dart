@@ -1,8 +1,6 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:ecommerce_admin_app/core/enums/update_user_action.dart';
 import 'package:ecommerce_admin_app/src/auth/domain/entities/local_user.dart';
 import 'package:ecommerce_admin_app/src/auth/domain/usecases/forgot_password.dart';
@@ -10,6 +8,8 @@ import 'package:ecommerce_admin_app/src/auth/domain/usecases/google_sign_in.dart
 import 'package:ecommerce_admin_app/src/auth/domain/usecases/sign_in.dart';
 import 'package:ecommerce_admin_app/src/auth/domain/usecases/sign_up.dart';
 import 'package:ecommerce_admin_app/src/auth/domain/usecases/update_profile.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';

@@ -1,8 +1,7 @@
+import 'package:ecommerce_admin_app/core/app/resources/colours.dart';
 import 'package:ecommerce_admin_app/core/constants/route_const.dart';
-import 'package:ecommerce_admin_app/core/resources/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ecommerce_admin_app/core/resources/media_res.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -30,13 +29,8 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image(
-              image: AssetImage(MediaRes.appIcon),
-              height: 150,
-              width: 150,
-            ),
             Text(
-              'ecommerce_admin_app',
+              'Ecommerce Admin',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 32,

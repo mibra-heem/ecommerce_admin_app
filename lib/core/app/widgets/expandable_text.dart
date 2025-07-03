@@ -1,7 +1,7 @@
+import 'package:ecommerce_admin_app/core/app/resources/colours.dart';
+import 'package:ecommerce_admin_app/core/extensions/context_extension.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:ecommerce_admin_app/core/extensions/context_extension.dart';
-import 'package:ecommerce_admin_app/core/resources/colors.dart';
 
 class ExpandableText extends StatefulWidget {
   const ExpandableText({

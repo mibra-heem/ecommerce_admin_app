@@ -8,18 +8,25 @@ class RoutePath{
   static const signUp = '/sign-up';
   static const forgetPassword = '/forget-password';
   static const dashboard = '/dashboard';
-  static const contact = '/contact';
-  static const message = '/message';
-  static const audioCall = '/audio-call';
-  static const incomingAudioCall = '/incoming-audio-call';
-  static const videoCall = '/video-call';
-  static const incomingVideoCall = '/incoming-video-call';
-
-
-
+  
   // Tab view routes section
-  static const chat = '/chat';
+  static const home = '/home';
+  static const product = '/product';
+  static const category = '/category';
+  static const banner = '/banner';
   static const profile = '/profile';
+
+  // Nested Tab view routes for product
+  static const productCreate = '/product/create';
+  static const productEdit = '/product/:id/edit';
+
+  // Nested Tab view routes for product
+  static const categoryCreate = '/category/create';
+  static const categoryEdit = '/category/:id/edit';
+
+  // Nested Tab view routes for product
+  static const bannerCreate = '/banner/create';
+  static const bannerEdit = '/banner/:id/edit';
 
   // Nested Tab view routes section
   static const editProfile = '$profile/edit-profile';
@@ -27,8 +34,6 @@ class RoutePath{
   static const notification = '$profile/notiflcation';
   static const privacy = '$profile/privacy';
   static const favourite = '$profile/favourite';
-
-
 
 }
 
@@ -42,17 +47,25 @@ class RouteName{
   static const signUp = 'sign-up';
   static const forgetPassword = 'forget-password';
   static const dashboard = 'dashboard';
-  static const contact = 'contact';
-  static const message = 'message';
-  static const audioCall = 'audio-call';
-  static const incomingAudioCall = 'incoming-audio-call';
-  static const videoCall = 'video-call';
-  static const incomingVideoCall = 'incoming-video-call';
-
 
   // Tab view routes section
-  static const chat = 'chat';
+  static const home = 'home';
+  static const product = 'product';
+  static const category = 'category';
+  static const banner = 'banner';
   static const profile = 'profile';
+
+  // Nested Tab view routes for product
+  static const productCreate = 'product-create';
+  static const productEdit = 'product-edit';
+
+  // Nested Tab view routes for product
+  static const categoryCreate = 'category-create';
+  static const categoryEdit = 'category-edit';
+
+  // Nested Tab view routes for product
+  static const bannerCreate = 'banner-create';
+  static const bannerEdit = 'banner-edit';
 
   // Nested Tab view routes section
   static const editProfile = 'edit-profile';

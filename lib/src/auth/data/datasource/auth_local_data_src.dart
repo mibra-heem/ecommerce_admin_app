@@ -1,11 +1,10 @@
-import 'package:flutter/foundation.dart';
-import 'package:hive/hive.dart';
+import 'package:ecommerce_admin_app/core/app/utils/typedef.dart';
 import 'package:ecommerce_admin_app/core/constants/storage_const.dart';
 import 'package:ecommerce_admin_app/core/errors/exception.dart';
-import 'package:ecommerce_admin_app/core/services/dependency_injection.dart';
-import 'package:ecommerce_admin_app/core/utils/typedef.dart';
 import 'package:ecommerce_admin_app/src/auth/data/models/local_user_model.dart';
 import 'package:ecommerce_admin_app/src/auth/domain/entities/local_user.dart';
+import 'package:flutter/foundation.dart';
+import 'package:hive/hive.dart';
 
 abstract class AuthLocalDataSource {
   const AuthLocalDataSource();
@@ -40,7 +39,7 @@ class AuthLocalDataSrcImpl implements AuthLocalDataSource {
   Future<LocalUser> getUserCachedData() async {
     try {
       final userMap = _userBox.get(StorageConst.user);
-      final user = DataMap.from(userMap as Map);
+      final user = SDMap.from(userMap as Map);
       return LocalUserModel.fromMap(user);
     } catch (e, s) {
       debugPrintStack(stackTrace: s);

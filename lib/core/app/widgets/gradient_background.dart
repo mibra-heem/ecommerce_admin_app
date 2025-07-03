@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:ecommerce_admin_app/core/res/colors.dart';
 
 class GradientBackground extends StatelessWidget {
   const GradientBackground({

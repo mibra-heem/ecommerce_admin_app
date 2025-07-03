@@ -1,4 +1,7 @@
+import 'package:ecommerce_admin_app/core/app/resources/colours.dart';
+import 'package:ecommerce_admin_app/core/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class MyField extends StatelessWidget {
   const MyField({
@@ -15,6 +18,7 @@ class MyField extends StatelessWidget {
     this.prefixIcon,
     this.hintText,
     this.hintStyle,
+    this.counterStyle,
     this.overrideValidator = false,
     this.isTextArea = false,
     this.maxLines,
@@ -24,7 +28,9 @@ class MyField extends StatelessWidget {
     this.enableColor,
     this.focusColor,
     this.borderColor,
+    this.inputFormatters,
     this.enabled = true,
+    this.enableOnlyNumbers = false,
     super.key,
   });
 
@@ -41,6 +47,7 @@ class MyField extends StatelessWidget {
   final String? hintText;
   final TextInputType? keyboardType;
   final TextStyle? hintStyle;
+  final TextStyle? counterStyle;
   final bool overrideValidator;
   final int? maxLines;
   final bool isTextArea;
@@ -50,7 +57,9 @@ class MyField extends StatelessWidget {
   final Color? borderColor;
   final Color? enableColor;
   final Color? focusColor;
+  final List<TextInputFormatter>? inputFormatters;
   final bool enabled;
+  final bool enableOnlyNumbers;
 
 
   @override
@@ -66,11 +75,15 @@ class MyField extends StatelessWidget {
       onTapOutside: isFocusOnTapOutside 
         ? (_) => FocusScope.of(context).unfocus() 
         : null,
+      style: context.theme.textTheme.bodyLarge,
       obscureText: obscureText,
       readOnly: readOnly,
-      keyboardType: keyboardType,
-      maxLines: isTextArea ? 4 : 1,
-      maxLength: isTextArea ? maxLength : null,
+      keyboardType: enableOnlyNumbers ? TextInputType.number : keyboardType,
+      inputFormatters: enableOnlyNumbers ? <TextInputFormatter>[
+        FilteringTextInputFormatter.digitsOnly,
+      ] : inputFormatters,
+      maxLines: maxLines,
+      maxLength: maxLength,
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: hintStyle,
@@ -78,12 +91,8 @@ class MyField extends StatelessWidget {
         suffixIcon: suffixIcon,
         filled: filled,
         fillColor: fillColor,
-        counterText: isTextArea ? counterText : null,
-        // enabledBorder: !enabled ? OutlineInputBorder(
-        //   borderRadius:  BorderRadius.circular(30),
-        //   // borderSide: const BorderSide(
-        //   //   color: Colours.white,),
-        // ) : null,
+        counterText: counterText,
+        counterStyle: counterStyle ?? const TextStyle(color: Colours.primary),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 20, vertical: 12,
         ),

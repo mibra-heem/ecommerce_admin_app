@@ -1,9 +1,7 @@
-
-
+import 'package:ecommerce_admin_app/core/app/resources/media_res.dart';
+import 'package:ecommerce_admin_app/core/app/widgets/gradient_background.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:ecommerce_admin_app/core/app/widgets/gradient_background.dart';
-import 'package:ecommerce_admin_app/core/resources/media_res.dart';
 
 class UnderDevelopmentScreen extends StatelessWidget {
   const UnderDevelopmentScreen({super.key});

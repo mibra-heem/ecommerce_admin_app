@@ -1,5 +1,5 @@
+import 'package:ecommerce_admin_app/core/app/utils/typedef.dart';
 import 'package:ecommerce_admin_app/core/enums/update_user_action.dart';
-import 'package:ecommerce_admin_app/core/utils/typedef.dart';
 import 'package:ecommerce_admin_app/src/auth/domain/entities/local_user.dart';
 
 abstract class AuthRepo{

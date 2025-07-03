@@ -1,8 +1,8 @@
-import 'package:flutter/foundation.dart';
 import 'package:ecommerce_admin_app/src/auth/data/models/local_user_model.dart';
 import 'package:ecommerce_admin_app/src/auth/domain/entities/local_user.dart';
 import 'package:ecommerce_admin_app/src/auth/domain/usecases/cache_user_data.dart';
 import 'package:ecommerce_admin_app/src/auth/domain/usecases/get_user_cached_data.dart';
+import 'package:flutter/foundation.dart';
 
 class UserProvider extends ChangeNotifier {
   UserProvider({

@@ -1,4 +1,4 @@
-import 'package:ecommerce_admin_app/core/utils/typedef.dart';
+import 'package:ecommerce_admin_app/core/app/utils/typedef.dart';
 
 abstract class ThemeRepo {
   const ThemeRepo();

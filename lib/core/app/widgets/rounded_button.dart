@@ -1,18 +1,24 @@
+import 'package:ecommerce_admin_app/core/app/resources/colours.dart';
 import 'package:flutter/material.dart';
-import 'package:ecommerce_admin_app/core/resources/colors.dart';
 
 class RoundedButton extends StatelessWidget {
   const RoundedButton(
     this.label, {
     required this.onPressed,
-    super.key,
+    this.padding,
+    this.fontSize,
+    this.labelStyle,
     this.elevation,
     this.labelColor,
     this.buttonColor,
+    super.key,
   });
 
   final String label;
+  final TextStyle? labelStyle;
+  final EdgeInsets? padding;
   final Color? labelColor;
+  final double? fontSize;
   final Color? buttonColor;
   final double? elevation;
   final void Function()? onPressed;
@@ -23,17 +29,15 @@ class RoundedButton extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         elevation: elevation,
-        backgroundColor: buttonColor ?? Colours.primary,
-        foregroundColor: labelColor ?? Colors.white,
-        padding: const EdgeInsets.symmetric(
-          horizontal: 50,
-          vertical: 17,
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(90),
-        ),
+        backgroundColor: buttonColor ?? Colours.grey900,
+        foregroundColor: labelColor ?? Colours.grey100,
+        padding: padding,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(90)),
       ),
-      child: Text(label, style: const TextStyle(fontWeight: FontWeight.w600),),
+      child: Text(
+        label,
+        style: TextStyle(fontSize: fontSize ?? 12, fontWeight: FontWeight.w600),
+      ),
     );
   }
 }

@@ -8,6 +8,9 @@ Future<void> init() async {
   await dotenv.load();
   await _initApiClient();
   await _initLocalStorage();
+  await _initBanner();
+  await _initCategories();
+  await _initProduct();
   await _initTheme();
 }
 
@@ -21,31 +24,47 @@ Future<void> _initLocalStorage() async {
   await Hive.initFlutter();
 }
 
-// /// Feature --> Home
-// Future<void> _initHome() async {
-//   sl
-//     ..registerFactory(
-//       () => HomeProvider(
-//         getBanners: sl(),
-//         getCategories: sl(),
-//         getProducts: sl(),
-//       ),
-//     )
-//     ..registerLazySingleton(() => GetBanners(sl()))
-//     ..registerLazySingleton(() => GetCategories(sl()))
-//     ..registerLazySingleton(() => GetProducts(sl()))
-//     ..registerLazySingleton<HomeRepo>(
-//       () => HomeRepoImpl(sl()),
-//     )
-//     ..registerLazySingleton<HomeRemoteDataSrc>(
-//       () => HomeRemoteDataSrcImpl(sl()),
-//     );
-// }
+/// Feature --> Product
+Future<void> _initProduct() async {
+  sl
+    ..registerFactory(() => ProductBloc(storeProduct: sl()))
+    ..registerFactory(() => ProductProvider(getProducts: sl()))
+    ..registerFactory(() => ProductCreateProvider(storeProduct: sl()))
+    ..registerLazySingleton(() => GetProducts(sl()))
+    ..registerLazySingleton(() => StoreProduct(sl()))
+    ..registerLazySingleton<ProductRepo>(() => ProductRepoImpl(sl()))
+    ..registerLazySingleton<ProductRemoteDataSrc>(
+      () => ProductRemoteDataSrcImpl(sl()),
+    );
+}
+
+/// Feature --> Categories
+Future<void> _initCategories() async {
+  sl
+    ..registerLazySingleton<CategoryRemoteDataSrc>(
+      () => CategoryRemoteDataSrcImpl(sl()),
+    )
+    ..registerLazySingleton<CategoryRepo>(() => CategoryRepoImpl(sl()))
+    ..registerLazySingleton<GetCategories>(() => GetCategories(sl()))
+    ..registerSingleton<CategoryProvider>(
+      CategoryProvider(getCategories: sl()),
+    );
+}
+
+/// Feature --> Product
+Future<void> _initBanner() async {
+  sl
+    ..registerFactory(() => BannerProvider(getBanners: sl()))
+    ..registerLazySingleton(() => GetBanners(sl()))
+    ..registerLazySingleton<BannerRepo>(() => BannerRepoImpl(sl()))
+    ..registerLazySingleton<BannerRemoteDataSrc>(
+      () => BannerRemoteDataSrcImpl(sl()),
+    );
+}
 
 /// Feature --> Theme
 Future<void> _initTheme() async {
-
-  final themeBox = await Hive.openBox(StorageConst.themeBox);
+  final themeBox = await Hive.openBox<dynamic>(StorageConst.themeBox);
 
   sl
     ..registerFactory(
@@ -55,8 +74,6 @@ Future<void> _initTheme() async {
     ..registerLazySingleton(() => LoadThemeMode(sl()))
     ..registerLazySingleton<ThemeRepo>(() => ThemeRepoImpl(sl()))
     ..registerLazySingleton<ThemeLocalDataSrc>(
-      () => ThemeLocalDataSrcImpl(
-        themeBox: themeBox,
-      ),
+      () => ThemeLocalDataSrcImpl(themeBox: themeBox),
     );
 }

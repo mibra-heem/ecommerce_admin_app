@@ -1,6 +1,6 @@
+import 'package:ecommerce_admin_app/core/app/widgets/my_field.dart';
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
-import 'package:ecommerce_admin_app/core/app/widgets/my_field.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({

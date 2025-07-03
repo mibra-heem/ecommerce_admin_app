@@ -29,7 +29,13 @@ class _DashboardState extends State<Dashboard> {
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, result) {
-        const tabBasePaths = ['/chat', '/profile'];
+        const tabBasePaths = [
+          '/product',
+          '/category',
+          '/home',
+          '/banner',
+          '/profile',
+        ];
 
         if (didPop) return;
         final currentLocation = GoRouterState.of(context).uri.toString();
@@ -41,8 +47,8 @@ class _DashboardState extends State<Dashboard> {
 
         if (isNestedRoute) {
           context.pop();
-        } else if (widget.shell.currentIndex != 0) {
-          widget.shell.goBranch(0);
+        } else if (widget.shell.currentIndex != 2) {
+          widget.shell.goBranch(2);
         } else {
           SystemNavigator.pop();
         }
@@ -52,19 +58,44 @@ class _DashboardState extends State<Dashboard> {
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: widget.shell.currentIndex,
           onTap: widget.shell.goBranch,
+          type: BottomNavigationBarType.fixed,
           items: [
             BottomNavigationBarItem(
-              label: 'Chat',
+              label: 'Product',
               icon: Icon(
                 widget.shell.currentIndex == 0
-                    ? IconlyBold.paper
-                    : IconlyLight.paper,
+                    ? IconlyBold.bag
+                    : IconlyLight.bag,
+              ),
+            ),
+            BottomNavigationBarItem(
+              label: 'Category',
+              icon: Icon(
+                widget.shell.currentIndex == 1
+                    ? IconlyBold.category
+                    : IconlyLight.category,
+              ),
+            ),
+            BottomNavigationBarItem(
+              label: 'Home',
+              icon: Icon(
+                widget.shell.currentIndex == 2
+                    ? IconlyBold.home
+                    : IconlyLight.home,
+              ),
+            ),
+            BottomNavigationBarItem(
+              label: 'Banner',
+              icon: Icon(
+                widget.shell.currentIndex == 3
+                    ? IconlyBold.image_2
+                    : IconlyLight.image_2,
               ),
             ),
             BottomNavigationBarItem(
               label: 'Profile',
               icon: Icon(
-                widget.shell.currentIndex == 1
+                widget.shell.currentIndex == 4
                     ? IconlyBold.profile
                     : IconlyLight.profile,
               ),
