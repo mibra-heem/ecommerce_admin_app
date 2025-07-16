@@ -9,6 +9,7 @@ class WideImagePicker extends StatefulWidget {
   const WideImagePicker({this.imageUrl, super.key});
 
   final String? imageUrl;
+
   @override
   State<WideImagePicker> createState() => _WideImagePickerState();
 }

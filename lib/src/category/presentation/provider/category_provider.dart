@@ -10,7 +10,7 @@ class CategoryProvider extends ChangeNotifier {
   }) : _getCategories = getCategories,
        _deleteCategory = deleteCategory {
     debugPrint('CategoryProvider created');
-    // Future.microtask(getCategoriesHandler);
+    Future.microtask(getCategoriesHandler);
   }
 
   final GetCategories _getCategories;

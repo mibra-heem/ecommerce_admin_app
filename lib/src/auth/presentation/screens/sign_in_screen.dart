@@ -40,7 +40,7 @@ class _SignInScreenState extends State<SignInScreen> {
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (_, state) {
           if (state is AuthError) {
-            CoreUtils.showSnackbar(context, state.message);
+            CoreUtils.showSnackbar(context, message : state.message);
           } else if (state is SignedIn) {
             sl<UserProvider>().cacheUserData(state.user);
             context.goNamed(RouteName.initial);

@@ -8,7 +8,11 @@ import 'package:image_picker/image_picker.dart';
 class CoreUtils {
   CoreUtils._();
 
-  static void showSnackbar(BuildContext context, String message) {
+  static void showSnackbar(
+    BuildContext context, {
+    required String message,
+    Color? color,
+  }) {
     ScaffoldMessenger.of(context)
       ..removeCurrentSnackBar()
       ..showSnackBar(
@@ -22,7 +26,7 @@ class CoreUtils {
           ),
           duration: const Duration(seconds: 2),
           behavior: SnackBarBehavior.floating,
-          backgroundColor: context.theme.primaryColor,
+          backgroundColor: color ?? context.theme.primaryColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),

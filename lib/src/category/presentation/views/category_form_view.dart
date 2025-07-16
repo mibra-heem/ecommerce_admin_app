@@ -1,3 +1,4 @@
+import 'package:ecommerce_admin_app/core/app/resources/colours.dart';
 import 'package:ecommerce_admin_app/core/app/utils/core_utils.dart';
 import 'package:ecommerce_admin_app/core/app/views/blurred_loading_view.dart';
 import 'package:ecommerce_admin_app/src/category/domain/entities/category.dart';
@@ -36,7 +37,7 @@ class _CategoryFormViewState extends State<CategoryFormView> {
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: CategoryForm(
-                isCreate: isCreate, 
+                isCreate: isCreate,
                 category: widget.category,
               ),
             ),
@@ -44,18 +45,25 @@ class _CategoryFormViewState extends State<CategoryFormView> {
         ),
         BlocConsumer<CategoryBloc, CategoryState>(
           listener: (context, state) {
-            if (state is CategoryStored) {
+            if (state is CategoryStored || state is CategoryUpdated) {
               CoreUtils.showSnackbar(
                 context,
-                'Category ${isCreate ? "created" : "updated"} successfully.',
+                message:
+                    'Category ${isCreate ? "created" : "updated"} successfully.',
+                color: isCreate ? Colours.success : Colors.amber,
               );
               context.pop();
             } else if (state is CategoryError) {
-              CoreUtils.showSnackbar(context, state.message);
+              CoreUtils.showSnackbar(
+                context,
+                message: state.message,
+                color: Colours.danger,
+              );
+              context.pop();
             }
           },
           builder: (context, state) {
-            if (state is StoringCategory) {
+            if (state is StoringCategory || state is UpdatingCategory) {
               return BlurredLoadingView(
                 label: '${isCreate ? "Creating" : "Updating"} Category',
               );

@@ -155,7 +155,9 @@ class ApiService implements BaseApiService {
         debugPrint(response.body);
         return jsonDecode(response.body) as SDMap;
       }else {
-        debugPrint(response.body);
+        debugPrint('Status Code :${response.statusCode}');
+
+        // debugPrint(response.body);
 
         throw ServerException(
           message: response.toString(),
@@ -262,6 +264,10 @@ class ApiService implements BaseApiService {
 
         return jsonDecode(response.body) as SDMap;
       } else {
+        // debugPrint(response.body);
+        debugPrint('statusCode : ${response.statusCode}');
+
+
         throw ServerException(
           message: 'DELETE request failed.',
           statusCode: response.statusCode,

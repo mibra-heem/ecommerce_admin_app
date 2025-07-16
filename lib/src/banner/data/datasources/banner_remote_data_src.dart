@@ -47,9 +47,9 @@ class BannerRemoteDataSrcImpl implements BannerRemoteDataSrc {
     try {
       await _apiService.sendMultipartRequest(
         method: ApiConst.post,
-        url: ApiConst.categoriesUrl,
+        url: ApiConst.bannersUrl,
         body: (banner as BannerModel).toJson(),
-        fieldName: 'icon',
+        fieldName: 'image',
         files: [File(banner.image)],
       );
     } on ServerException catch (e) {
@@ -88,6 +88,7 @@ class BannerRemoteDataSrcImpl implements BannerRemoteDataSrc {
   @override
   Future<void> deleteBanner(int id) async {
     try {
+      debugPrint('Deleting the banner $id.');
       await _apiService.delete(url: '${ApiConst.bannersUrl}/$id');
     } on ServerException catch (e) {
       throw ServerException(message: e.message, statusCode: e.statusCode);

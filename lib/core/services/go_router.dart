@@ -1,7 +1,8 @@
 import 'package:ecommerce_admin_app/core/constants/route_const.dart';
 import 'package:ecommerce_admin_app/core/services/dependency_injection.dart';
+import 'package:ecommerce_admin_app/src/banner/domain/entities/banner.dart';
 import 'package:ecommerce_admin_app/src/banner/presentation/bloc/banner_bloc.dart';
-import 'package:ecommerce_admin_app/src/banner/presentation/provider/banner_provider.dart';
+import 'package:ecommerce_admin_app/src/banner/presentation/views/banner_form_view.dart';
 import 'package:ecommerce_admin_app/src/banner/presentation/views/banner_view.dart';
 import 'package:ecommerce_admin_app/src/category/domain/entities/category.dart';
 import 'package:ecommerce_admin_app/src/category/presentation/bloc/category_bloc.dart';
@@ -44,7 +45,7 @@ final GoRouter router = GoRouter(
     StatefulShellRoute.indexedStack(
       builder: (context, state, shell) {
         return ChangeNotifierProvider(
-          create: (_) => sl<CategoryProvider>()..getCategoriesHandler(),
+          create: (_) => sl<CategoryProvider>(),
           child: Dashboard(shell: shell),
         );
       },
@@ -151,13 +152,23 @@ final GoRouter router = GoRouter(
             GoRoute(
               path: RoutePath.bannerCreate,
               name: RouteName.bannerCreate,
-              builder:
-                  (context, state) => const Placeholder(),
+              pageBuilder: (context, state) {
+                return NoTransitionPage(
+                  key: state.pageKey,
+                  child: const BannerFormView(),
+                );
+              },
             ),
             GoRoute(
               path: RoutePath.bannerEdit,
               name: RouteName.bannerEdit,
-              builder: (context, state) => const Placeholder(),
+              pageBuilder: (context, state) {
+                final banner = state.extra! as BannerEntity;
+                return NoTransitionPage(
+                  key: state.pageKey,
+                  child: BannerFormView(banenr: banner),
+                );
+              },
             ),
           ],
         ),

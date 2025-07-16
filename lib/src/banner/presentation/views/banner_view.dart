@@ -1,5 +1,6 @@
 import 'package:ecommerce_admin_app/core/app/resources/colours.dart';
 import 'package:ecommerce_admin_app/core/app/views/loading_view.dart';
+import 'package:ecommerce_admin_app/core/app/widgets/app_dialog_box.dart';
 import 'package:ecommerce_admin_app/core/constants/route_const.dart';
 import 'package:ecommerce_admin_app/src/banner/presentation/bloc/banner_bloc.dart';
 import 'package:ecommerce_admin_app/src/banner/presentation/views/widgets/banner_card.dart';
@@ -76,7 +77,35 @@ class _BannerViewState extends State<BannerView> {
                   itemBuilder: (_, index) {
                     debugPrint('Building the Banner Card $index');
                     final banner = state.banners[index];
-                    return BannerCard(banner: banner);
+                    return BannerCard(
+                      banner: banner,
+                      onEdit: () {
+                        context.pushNamed(
+                          RouteName.bannerEdit,
+                          pathParameters: {'id': '${banner.id}'},
+                          extra: banner,
+                        );
+                      },
+                      onDelete: () {
+                        showDialog<void>(
+                          context: context,
+                          builder: (_) {
+                            return AppDialogBox.alert(
+                              title: 'Remove',
+                              content:
+                                  'Are you sure you want to '
+                                  'delete this banner?',
+                              onConfirm: () {
+                                context.read<BannerBloc>()
+                                  ..add(DeleteBannerEvent(banner.id!))
+                                  ..add(const GetBannersEvent());
+                                context.pop();
+                              },
+                            );
+                          },
+                        );
+                      },
+                    );
                   },
                 );
               }

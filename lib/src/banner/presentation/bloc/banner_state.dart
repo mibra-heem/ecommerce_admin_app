@@ -26,8 +26,8 @@ class StoringBanner extends BannerState {
   const StoringBanner();
 }
 
-class ProdutStored extends BannerState {
-  const ProdutStored();
+class BannerStored extends BannerState {
+  const BannerStored();
 }
 
 class UpdatingBanner extends BannerState {

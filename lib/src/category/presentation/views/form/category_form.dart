@@ -320,7 +320,10 @@ class _CategoryFormState extends State<CategoryForm> {
                         bloc.add(StoreCategoryEvent(category));
                       } else {
                         if (nothingChanged) {
-                          CoreUtils.showSnackbar(context, 'Nothing to update.');
+                          CoreUtils.showSnackbar(
+                            context,
+                            message: 'Nothing to update.',
+                          );
                           return;
                         }
                         final updates = <String, dynamic>{};

@@ -1,3 +1,4 @@
+import 'package:ecommerce_admin_app/core/app/resources/colours.dart';
 import 'package:ecommerce_admin_app/core/app/utils/core_utils.dart';
 import 'package:ecommerce_admin_app/core/app/views/blurred_loading_view.dart';
 import 'package:ecommerce_admin_app/src/product/domain/entities/product.dart';
@@ -40,19 +41,25 @@ class _ProductFormViewState extends State<ProductFormView> {
         ),
         BlocConsumer<ProductBloc, ProductState>(
           listener: (context, state) {
-            if (state is ProdutStored) {
+            if (state is ProdutStored || state is ProductUpdated) {
               CoreUtils.showSnackbar(
                 context,
-                'Product ${isCreate ? "created" : "updated"} successfully.',
+                message:
+                    'Product ${isCreate ? "created" : "updated"} successfully.',
+                color: isCreate ? Colours.success : Colors.amber
               );
               context.pop();
             } else if (state is ProductError) {
-              CoreUtils.showSnackbar(context, state.message);
-              // context.pop();
+              CoreUtils.showSnackbar(
+                context, 
+                message: state.message,
+                color: Colours.danger,
+              );
+              context.pop();
             }
           },
           builder: (context, state) {
-            if (state is StoringProduct) {
+            if (state is StoringProduct || state is UpdatingProduct) {
               return BlurredLoadingView(
                 label: '${isCreate ? "Creating" : "Updating"} Product',
               );

@@ -42,7 +42,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (_, state) {
           if (state is AuthError) {
-            CoreUtils.showSnackbar(context, state.message);
+            CoreUtils.showSnackbar(context, message : state.message);
           } else if (state is SignedUp) {
             if (kDebugMode) print('Entered SignedUp State...');
             context.read<AuthBloc>().add(

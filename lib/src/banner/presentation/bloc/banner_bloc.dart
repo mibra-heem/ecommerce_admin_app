@@ -61,7 +61,7 @@ class BannerBloc extends Bloc<BannerEvent, BannerState> {
 
     result.fold((failure) => emit(BannerError(failure.errorMessage)), (_) {
       debugPrint('Banner Created Successfully.');
-      emit(const ProdutStored());
+      emit(const BannerStored());
     });
   }
 

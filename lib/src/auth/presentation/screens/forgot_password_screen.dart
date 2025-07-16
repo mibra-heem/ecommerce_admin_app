@@ -34,7 +34,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (_, state) {
           if (state is AuthError) {
-            CoreUtils.showSnackbar(context, 'Error While forgot password');
+            CoreUtils.showSnackbar(context, message : 'Error While forgot password');
           } else if (state is ForgotPasswordSent) {}
         },
         builder: (_, state) {
