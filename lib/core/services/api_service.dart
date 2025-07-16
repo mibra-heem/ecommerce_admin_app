@@ -157,7 +157,7 @@ class ApiService implements BaseApiService {
       }else {
         debugPrint('Status Code :${response.statusCode}');
 
-        // debugPrint(response.body);
+        debugPrint(response.body);
 
         throw ServerException(
           message: response.toString(),
