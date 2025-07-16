@@ -61,27 +61,29 @@ class MyField extends StatelessWidget {
   final bool enabled;
   final bool enableOnlyNumbers;
 
-
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      validator: overrideValidator ? validator : (value){
-        if(value == null || value == ''){
-          return 'This field is required.';
-        }
-        return validator?.call(value);
-      },
-      onTapOutside: isFocusOnTapOutside 
-        ? (_) => FocusScope.of(context).unfocus() 
-        : null,
+      validator:
+          overrideValidator
+              ? validator
+              : (value) {
+                if (value == null || value == '') {
+                  return 'This field is required.';
+                }
+                return validator?.call(value);
+              },
+      onTapOutside:
+          isFocusOnTapOutside ? (_) => FocusScope.of(context).unfocus() : null,
       style: context.theme.textTheme.bodyLarge,
       obscureText: obscureText,
       readOnly: readOnly,
       keyboardType: enableOnlyNumbers ? TextInputType.number : keyboardType,
-      inputFormatters: enableOnlyNumbers ? <TextInputFormatter>[
-        FilteringTextInputFormatter.digitsOnly,
-      ] : inputFormatters,
+      inputFormatters:
+          enableOnlyNumbers
+              ? <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly]
+              : inputFormatters,
       maxLines: maxLines,
       maxLength: maxLength,
       decoration: InputDecoration(
@@ -89,12 +91,25 @@ class MyField extends StatelessWidget {
         hintStyle: hintStyle,
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        border: OutlineInputBorder(
+          // borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(20),
+        ),
         filled: filled,
         fillColor: fillColor,
         counterText: counterText,
         counterStyle: counterStyle ?? const TextStyle(color: Colours.primary),
         contentPadding: const EdgeInsets.symmetric(
-          horizontal: 20, vertical: 12,
+          horizontal: 20,
+          vertical: 12,
         ),
       ),
     );

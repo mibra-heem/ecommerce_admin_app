@@ -69,4 +69,11 @@ class CoreUtils {
   static String getUrlWithId({required String url, required int id}) {
     return '$url/$id';
   }
+
+  static bool toBoolean(int value) {
+    if (value == 0) {
+      return false;
+    }
+    return true;
+  }
 }

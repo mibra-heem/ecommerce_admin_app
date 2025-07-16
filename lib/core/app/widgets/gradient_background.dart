@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 
 class GradientBackground extends StatelessWidget {
-  const GradientBackground({
-    required this.child, super.key,
-    this.colors,
-    });
+  const GradientBackground({required this.child, super.key, this.colors});
 
   final Widget child;
   final List<Color>? colors;
@@ -12,10 +9,8 @@ class GradientBackground extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        constraints: const BoxConstraints.expand(),
-        child: SafeArea(
-          child: child,
-        ),
-      );
+      constraints: const BoxConstraints.expand(),
+      child: SafeArea(child: child),
+    );
   }
 }

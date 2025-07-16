@@ -7,13 +7,13 @@ class ArrowBackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      onPressed: (){
+      onPressed: () {
         context.pop();
-      }, 
+      },
       icon: Icon(
-        Theme.of(context).platform == TargetPlatform.iOS 
-        ? Icons.arrow_back_ios_new 
-        : Icons.arrow_back,
+        Theme.of(context).platform == TargetPlatform.iOS
+            ? Icons.arrow_back_ios_new
+            : Icons.arrow_back,
       ),
     );
   }

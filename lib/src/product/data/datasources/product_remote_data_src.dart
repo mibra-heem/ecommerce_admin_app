@@ -12,8 +12,8 @@ abstract class ProductRemoteDataSrc {
   const ProductRemoteDataSrc();
   Future<List<Product>> getProducts();
   Future<void> storeProduct(Product product);
-  Future<void> updateProduct(Product product);
-  Future<void> deleteProduct();
+  Future<void> updateProduct({required String id, required SDMap updates});
+  Future<void> deleteProduct(String id);
 }
 
 class ProductRemoteDataSrcImpl implements ProductRemoteDataSrc {
@@ -45,11 +45,12 @@ class ProductRemoteDataSrcImpl implements ProductRemoteDataSrc {
   @override
   Future<void> storeProduct(Product product) async {
     try {
-      await _apiService.postMultiPart(
+      await _apiService.sendMultipartRequest(
+        method: ApiConst.post,
         url: ApiConst.productsUrl,
         body: (product as ProductModel).toJson(),
-        fieldName: 'image',
-        file: File(product.image!),
+        fieldName: 'images[]', // Use 'images[]' for multiple files
+        files: product.images!.map(File.new).toList(),
       );
     } on ServerException catch (e) {
       throw ServerException(message: e.message, statusCode: e.statusCode);
@@ -60,14 +61,52 @@ class ProductRemoteDataSrcImpl implements ProductRemoteDataSrc {
   }
 
   @override
-  Future<void> updateProduct(Product product) {
-    // TODO: implement updateProduct
-    throw UnimplementedError();
+  Future<void> updateProduct({
+    required String id,
+    required SDMap updates,
+  }) async {
+    try {
+      debugPrint('updateProduct from product remote data source ....');
+
+      if (updates.containsKey('images')) {
+        debugPrint('Starting sendMultipartRequest ....');
+
+        final images = updates.remove('images') as List<File?>;
+        updates.addAll({'_method': ApiConst.patch});
+        debugPrint('$updates');
+        debugPrint('$images');
+        await _apiService.sendMultipartRequest(
+          method: ApiConst.post,
+          url: '${ApiConst.productsUrl}/$id',
+          body: updates,
+          fieldName: 'images[]',
+          files: images.whereType<File>().toList(),
+        );
+      } else {
+        debugPrint('Starting patch request ....');
+
+        await _apiService.patch(
+          url: '${ApiConst.productsUrl}/$id',
+          body: updates,
+        );
+      }
+    } on ServerException catch (e) {
+      throw ServerException(message: e.message, statusCode: e.statusCode);
+    } catch (e, s) {
+      debugPrintStack(stackTrace: s);
+      throw UnknownException(message: e.toString());
+    }
   }
 
   @override
-  Future<void> deleteProduct() {
-    // TODO: implement deleteProduct
-    throw UnimplementedError();
+  Future<void> deleteProduct(String id) async {
+    try {
+      await _apiService.delete(url: '${ApiConst.productsUrl}/$id');
+    } on ServerException catch (e) {
+      throw ServerException(message: e.message, statusCode: e.statusCode);
+    } catch (e, s) {
+      debugPrintStack(stackTrace: s);
+      throw UnknownException(message: e.toString());
+    }
   }
 }

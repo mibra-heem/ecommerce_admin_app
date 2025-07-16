@@ -12,10 +12,40 @@ class BannerRepoImpl implements BannerRepo {
   final BannerRemoteDataSrc _remoteDataSrc;
 
   @override
-  RFuture<List<BannerEntity>> getBanners() async{
+  RFuture<List<BannerEntity>> getBanners() async {
     try {
       final banners = await _remoteDataSrc.getBanners();
       return Right(banners);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(message: e.message, statusCode: e.statusCode));
+    }
+  }
+
+  @override
+  RFuture<void> storeBanner(BannerEntity banner) async {
+    try {
+      await _remoteDataSrc.storeBanner(banner);
+      return const Right(null);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(message: e.message, statusCode: e.statusCode));
+    }
+  }
+
+  @override
+  RFuture<void> updateBanner({required int id, required SDMap updates}) async {
+    try {
+      await _remoteDataSrc.updateBanner(id: id, updates: updates);
+      return const Right(null);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(message: e.message, statusCode: e.statusCode));
+    }
+  }
+
+  @override
+  RFuture<void> deleteBanner(int id) async {
+    try {
+      await _remoteDataSrc.deleteBanner(id);
+      return const Right(null);
     } on ServerException catch (e) {
       return Left(ServerFailure(message: e.message, statusCode: e.statusCode));
     }

@@ -2,6 +2,10 @@ part of 'product_bloc.dart';
 
 sealed class ProductEvent extends Equatable {
   const ProductEvent();
+}
+
+class GetProductsEvent extends ProductEvent {
+  const GetProductsEvent();
 
   @override
   List<Object> get props => [];
@@ -17,12 +21,12 @@ class StoreProductEvent extends ProductEvent {
 }
 
 class UpdateProductEvent extends ProductEvent {
-  const UpdateProductEvent(this.product);
-
-  final Product product;
+  const UpdateProductEvent({required this.id, required this.updates});
+  final String id;
+  final SDMap updates;
 
   @override
-  List<Object> get props => [product];
+  List<Object?> get props => [id, updates];
 }
 
 class DeleteProductEvent extends ProductEvent {

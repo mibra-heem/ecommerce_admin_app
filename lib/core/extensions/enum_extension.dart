@@ -1,7 +1,6 @@
 import 'package:ecommerce_admin_app/core/enums/call.dart';
 
 extension CallStatusExt on CallStatus {
-
   static CallStatus toEnum(String value) {
     return CallStatus.values.firstWhere(
       (e) => e.name == value,
@@ -11,7 +10,6 @@ extension CallStatusExt on CallStatus {
 }
 
 extension CallTypeExt on CallType {
-
   static CallType toEnum(String value) {
     return CallType.values.firstWhere(
       (e) => e.name == value,

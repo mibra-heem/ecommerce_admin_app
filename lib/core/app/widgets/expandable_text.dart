@@ -1,14 +1,11 @@
 import 'package:ecommerce_admin_app/core/app/resources/colours.dart';
+import 'package:ecommerce_admin_app/core/app/resources/fonts.dart';
 import 'package:ecommerce_admin_app/core/extensions/context_extension.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class ExpandableText extends StatefulWidget {
-  const ExpandableText({
-    required this.text,
-    required this.context,
-    super.key,
-  });
+  const ExpandableText({required this.text, required this.context, super.key});
 
   final String text;
   final BuildContext context;
@@ -25,18 +22,15 @@ class _ExpandableTextState extends State<ExpandableText> {
 
   @override
   void initState() {
-    textSpan = TextSpan(
-      text: widget.text,
-    );
+    textSpan = TextSpan(text: widget.text);
 
     textPainter = TextPainter(
       text: textSpan,
       textDirection: TextDirection.ltr,
-      maxLines: expanded ? null : 2,
+      maxLines: expanded ? null : 4,
     )..layout(maxWidth: widget.context.width * .8);
 
     super.initState();
-
   }
 
   @override
@@ -49,43 +43,31 @@ class _ExpandableTextState extends State<ExpandableText> {
   Widget build(BuildContext context) {
     const defaultStyle = TextStyle(
       color: Colours.grey600,
-      height: 1.8,
-      letterSpacing: 0.2,
-      fontSize: 14,
+      height: 1.4,
+      fontFamily: Fonts.poppins,
     );
     return textPainter.didExceedMaxLines
         ? RichText(
-            text: TextSpan(
-              text: expanded
-                  ? widget.text
-                  : '${widget.text.substring(
-                      0,
-                      textPainter
-                          .getPositionForOffset(Offset(
-                            widget.context.width,
-                            widget.context.height,
-                          ),)
-                          .offset,
-                    )}...',
-              style: defaultStyle,
-              children: [
-                TextSpan(
-                  text: expanded ? ' See less' : 'See more',
-                  style: const TextStyle(
-                    color: Colours.primary,
-                    fontSize: 14,
-                  ),
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () => setState(() {
-                          expanded = !expanded;
-                        }),
-                ),
-              ],
-            ),
-          )
-        : Text(
-            widget.text,
+          text: TextSpan(
+            text:
+                expanded
+                    ? widget.text
+                    : '${widget.text.substring(0, textPainter.getPositionForOffset(Offset(widget.context.width, widget.context.height)).offset)}...',
             style: defaultStyle,
-          );
+            children: [
+              TextSpan(
+                text: expanded ? ' See less' : 'See more',
+                style: const TextStyle(color: Colours.primary, fontSize: 14),
+                recognizer:
+                    TapGestureRecognizer()
+                      ..onTap =
+                          () => setState(() {
+                            expanded = !expanded;
+                          }),
+              ),
+            ],
+          ),
+        )
+        : Text(widget.text, style: defaultStyle);
   }
 }

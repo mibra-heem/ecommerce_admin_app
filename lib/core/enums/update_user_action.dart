@@ -1,7 +1,1 @@
-enum UpdateUserAction {
-  displayName,
-  email, 
-  image, 
-  password, 
-  bio,
-}
+enum UpdateUserAction { displayName, email, image, password, bio }

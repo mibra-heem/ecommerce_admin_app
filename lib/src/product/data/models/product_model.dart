@@ -1,3 +1,4 @@
+import 'package:ecommerce_admin_app/core/app/utils/core_utils.dart';
 import 'package:ecommerce_admin_app/core/app/utils/typedef.dart';
 import 'package:ecommerce_admin_app/src/category/data/models/category_model.dart';
 import 'package:ecommerce_admin_app/src/category/domain/entities/category.dart';
@@ -6,10 +7,10 @@ import 'package:ecommerce_admin_app/src/product/domain/entities/product.dart';
 class ProductModel extends Product {
   const ProductModel({
     required super.name,
-    required super.category,
     required super.price,
+    required super.category,
     super.id,
-    super.image,
+    super.images,
     super.description,
     super.isActive,
   });
@@ -20,12 +21,14 @@ class ProductModel extends Product {
     return ProductModel(
       id: data['id'] as String?,
       name: data['name'] as String,
-      category:
-          CategoryModel.fromJson(data['category'] as SDMap),
+      category: CategoryModel.fromJson(data['category'] as SDMap),
       price: data['price'] as int,
-      image: data['image'] as String?,
+      images:
+          data['images'] != null
+              ? List<String>.from(data['images'] as List)
+              : null,
       description: data['description'] as String?,
-      // isActive: data['is_active'] as bool,
+      isActive: CoreUtils.toBoolean((data['is_active'] ?? 1) as int),
     );
   }
 
@@ -35,7 +38,7 @@ class ProductModel extends Product {
     int? categoryId,
     CategoryEntity? category,
     int? price,
-    String? image,
+    List<String>? images,
     String? description,
     bool? isActive,
   }) {
@@ -44,7 +47,7 @@ class ProductModel extends Product {
       name: name ?? this.name,
       category: category ?? this.category,
       price: price ?? this.price,
-      image: image ?? this.image,
+      images: images ?? this.images,
       description: description ?? this.description,
       isActive: isActive ?? this.isActive,
     );
@@ -54,7 +57,8 @@ class ProductModel extends Product {
     return {
       'id': id,
       'name': name,
-      'category': category,
+      'images': images,
+      'category_id': category.id,
       'price': price,
       'description': description,
       'is_active': isActive,

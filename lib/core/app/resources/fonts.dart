@@ -3,5 +3,4 @@ class Fonts {
 
   static const aeonik = 'aeonik';
   static const poppins = 'poppins';
-
 }

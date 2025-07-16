@@ -40,8 +40,8 @@ class _SignInFormState extends State<SignInForm> {
             validatePassword: true,
             keyboardType: TextInputType.visiblePassword,
             suffixIcon: IconButton(
-              onPressed: (){
-                setState((){
+              onPressed: () {
+                setState(() {
                   obscurePassword = !obscurePassword;
                 });
               },

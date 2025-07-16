@@ -27,10 +27,7 @@ class PopupItem extends StatelessWidget {
             fontWeight: FontWeight.w500,
           ),
         ),
-        Icon(
-          icon,
-          color: iconColor,
-        ),
+        Icon(icon, color: iconColor),
       ],
     );
   }

@@ -9,18 +9,18 @@ class UnderDevelopmentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: GradientBackground(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center, 
-            children: [
-              Lottie.asset(MediaRes.underDevelopmentScreen),
-              const Text(
-                'Page Under Development',
-                style: TextStyle(fontSize: 24),
-              ),
-            ],
-          ),
+      body: GradientBackground(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Lottie.asset(MediaRes.underDevelopmentScreen),
+            const Text(
+              'Page Under Development',
+              style: TextStyle(fontSize: 24),
+            ),
+          ],
         ),
+      ),
     );
   }
 }

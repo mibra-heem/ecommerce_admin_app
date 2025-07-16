@@ -1,6 +1,6 @@
 part of 'dependency_injection.dart';
 
-final sl = GetIt.instance;
+final GetIt sl = GetIt.instance;
 
 /// Injectiing Dependencies
 
@@ -27,11 +27,18 @@ Future<void> _initLocalStorage() async {
 /// Feature --> Product
 Future<void> _initProduct() async {
   sl
-    ..registerFactory(() => ProductBloc(storeProduct: sl()))
-    ..registerFactory(() => ProductProvider(getProducts: sl()))
-    ..registerFactory(() => ProductCreateProvider(storeProduct: sl()))
+    ..registerFactory(
+      () => ProductBloc(
+        getProducts: sl(),
+        storeProduct: sl(),
+        updateProduct: sl(),
+        deleteProduct: sl(),
+      ),
+    )
     ..registerLazySingleton(() => GetProducts(sl()))
     ..registerLazySingleton(() => StoreProduct(sl()))
+    ..registerLazySingleton(() => UpdateProduct(sl()))
+    ..registerLazySingleton(() => DeleteProduct(sl()))
     ..registerLazySingleton<ProductRepo>(() => ProductRepoImpl(sl()))
     ..registerLazySingleton<ProductRemoteDataSrc>(
       () => ProductRemoteDataSrcImpl(sl()),
@@ -45,17 +52,36 @@ Future<void> _initCategories() async {
       () => CategoryRemoteDataSrcImpl(sl()),
     )
     ..registerLazySingleton<CategoryRepo>(() => CategoryRepoImpl(sl()))
-    ..registerLazySingleton<GetCategories>(() => GetCategories(sl()))
+    ..registerLazySingleton(() => GetCategories(sl()))
+    ..registerLazySingleton(() => StoreCategory(sl()))
+    ..registerLazySingleton(() => UpdateCategory(sl()))
+    ..registerLazySingleton(() => DeleteCategory(sl()))
+    ..registerFactory(
+      () => CategoryBloc(storeCategory: sl(), updateCategory: sl()),
+    )
     ..registerSingleton<CategoryProvider>(
-      CategoryProvider(getCategories: sl()),
+      CategoryProvider(
+        getCategories: sl<GetCategories>(),
+        deleteCategory: sl<DeleteCategory>(),
+      ),
     );
 }
 
-/// Feature --> Product
+/// Feature --> Banners
 Future<void> _initBanner() async {
   sl
-    ..registerFactory(() => BannerProvider(getBanners: sl()))
+    ..registerFactory(
+      () => BannerBloc(
+        getBanners: sl(),
+        storeBanner: sl(),
+        updateBanner: sl(),
+        deleteBanner: sl(),
+      ),
+    )
     ..registerLazySingleton(() => GetBanners(sl()))
+    ..registerLazySingleton(() => StoreBanner(sl()))
+    ..registerLazySingleton(() => UpdateBanner(sl()))
+    ..registerLazySingleton(() => DeleteBanner(sl()))
     ..registerLazySingleton<BannerRepo>(() => BannerRepoImpl(sl()))
     ..registerLazySingleton<BannerRemoteDataSrc>(
       () => BannerRemoteDataSrcImpl(sl()),

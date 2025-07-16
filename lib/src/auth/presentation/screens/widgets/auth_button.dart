@@ -17,12 +17,8 @@ class AuthButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap, 
-      child: Image(
-        height: 40,
-        width: 40,
-        image: image,
-      ),
+      onTap: onTap,
+      child: Image(height: 40, width: 40, image: image),
     );
   }
 }

@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:ecommerce_admin_app/core/app/utils/typedef.dart';
-import 'package:ecommerce_admin_app/core/constants/api_const.dart';
 import 'package:ecommerce_admin_app/core/errors/exception.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -17,10 +16,11 @@ abstract class BaseApiService {
     bool isMultiPart = false,
     bool needBaseUrl = true,
   });
-  Future<SDMap> postMultiPart({
+  Future<SDMap> sendMultipartRequest({
+    required String method,
     required String url,
     required SDMap? body,
-    required File file,
+    required List<File> files,
     required String fieldName,
     String serverAccessToken,
     bool needBaseUrl = true,
@@ -31,9 +31,15 @@ abstract class BaseApiService {
     String? serverAccessToken,
     bool needBaseUrl = true,
   });
-  Future<SDMap> delete({
+  Future<SDMap> patch({
     required String url,
     required SDMap? body,
+    String? serverAccessToken,
+    bool needBaseUrl = true,
+  });
+  Future<SDMap> delete({
+    required String url,
+    SDMap? body,
     String? serverAccessToken,
     bool needBaseUrl = true,
   });
@@ -110,58 +116,54 @@ class ApiService implements BaseApiService {
   }
 
   @override
-  Future<SDMap> postMultiPart({
+  Future<SDMap> sendMultipartRequest({
+    required String method,
     required String url,
-    required SDMap? body,
-    required File file,
+    required Map<String, dynamic>? body,
+    required List<File> files,
     required String fieldName,
-    bool isMultiPart = false,
     String? serverAccessToken,
     bool needBaseUrl = true,
   }) async {
     final uri = Uri.parse(needBaseUrl ? _baseUrl + url : url);
+    final request = http.MultipartRequest(method, uri);
 
-    final request = http.MultipartRequest(ApiConst.post, uri);
-
-    debugPrint('POST multipart request object created ....');
-
-    // Add token header
+    // Headers
     if (serverAccessToken != null) {
       request.headers['Authorization'] = 'Bearer $serverAccessToken';
     }
 
-    if (body != null) {
+    // Fields
+    if (body != null && body.isNotEmpty) {
       request.fields.addAll(
         body.map((key, value) => MapEntry(key, value.toString())),
       );
-      debugPrint('Fields has been added to the request ....');
-
     }
 
-    // Attach file to the request
-    request.files.add(await http.MultipartFile.fromPath(fieldName, file.path));
-
-    debugPrint('Image file has been added to the request ....');
+    // Add files
+    for (final file in files) {
+      request.files.add(
+        await http.MultipartFile.fromPath(fieldName, file.path),
+      );
+    }
 
     try {
       final streamedResponse = await request.send();
-      debugPrint('MultipartRequest has been sended ....');
-
       final response = await http.Response.fromStream(streamedResponse);
 
-      debugPrint('MultipartRequest response has been recieved ....');
-
-      if (response.statusCode == 201) {
-        debugPrint('POST multipart request was successful.');
+      if (response.statusCode == 200 || response.statusCode == 201) {
         debugPrint(response.body);
         return jsonDecode(response.body) as SDMap;
-      } else {
-        throw Exception(
-          'POST multipart request failed with status: ${response.statusCode}',
+      }else {
+        debugPrint(response.body);
+
+        throw ServerException(
+          message: response.toString(),
+          statusCode: response.statusCode,
         );
       }
     } catch (e) {
-      throw Exception('POST multipart request error: $e');
+      throw ServerException(message: e.toString());
     }
   }
 
@@ -200,7 +202,7 @@ class ApiService implements BaseApiService {
   }
 
   @override
-  Future<SDMap> delete({
+  Future<SDMap> patch({
     required String url,
     required SDMap? body,
     String? serverAccessToken,
@@ -208,9 +210,46 @@ class ApiService implements BaseApiService {
   }) async {
     final uri = Uri.parse(needBaseUrl ? _baseUrl + url : url);
 
-    final response = await http.delete(
+    final response = await http.patch(
       uri,
       body: jsonEncode(body),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $serverAccessToken',
+      },
+    );
+
+    try {
+      if (response.statusCode == 200) {
+        debugPrint('PATCH Request was successfull.');
+        debugPrint(response.body);
+
+
+        return jsonDecode(response.body) as SDMap;
+      } else {
+        debugPrint(response.body);
+
+        throw ServerException(
+          message: 'PATCH request failed.',
+          statusCode: response.statusCode,
+        );
+      }
+    } on ServerException catch (e) {
+      throw ServerException(message: e.message);
+    }
+  }
+
+  @override
+  Future<SDMap> delete({
+    required String url,
+    SDMap? body,
+    String? serverAccessToken,
+    bool needBaseUrl = true,
+  }) async {
+    final uri = Uri.parse(needBaseUrl ? _baseUrl + url : url);
+
+    final response = await http.delete(
+      uri,
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $serverAccessToken',

@@ -1,5 +1,10 @@
 import 'package:ecommerce_admin_app/core/app/resources/colours.dart';
 import 'package:ecommerce_admin_app/core/app/resources/fonts.dart';
+import 'package:ecommerce_admin_app/core/app/themes/app_color_scheme.dart';
+import 'package:ecommerce_admin_app/core/app/themes/app_input_decoration_theme.dart';
+import 'package:ecommerce_admin_app/core/app/themes/app_product_card_theme.dart';
+import 'package:ecommerce_admin_app/core/app/themes/app_text_theme.dart';
+import 'package:ecommerce_admin_app/core/app/themes/my_app_bar_theme.dart';
 import 'package:flutter/material.dart';
 
 class AppTheme {
@@ -11,38 +16,15 @@ class AppTheme {
     visualDensity: VisualDensity.adaptivePlatformDensity,
     brightness: Brightness.light,
     primaryColor: Colours.primary,
-    colorScheme: Colours.colorSchemeLight,
+    colorScheme: AppColorScheme.light,
     applyElevationOverlayColor: false,
     shadowColor: Colors.transparent,
     splashColor: Colors.transparent,
     splashFactory: NoSplash.splashFactory,
     scaffoldBackgroundColor: Colours.scaffoldLight,
-    textTheme: const TextTheme(
-      headlineMedium: TextStyle(
-        color: Colours.grey800,
-        fontSize: 24,
-        fontWeight: FontWeight.w500,
-      ),
-      titleMedium: TextStyle(
-        color: Colours.grey600,
-        fontWeight: FontWeight.w500,
-        overflow: TextOverflow.ellipsis,
-      ),
-      labelSmall: TextStyle(
-        color: Colours.grey700,
-        overflow: TextOverflow.ellipsis,
-      ),
-    ),
-    appBarTheme: const AppBarTheme(
-      backgroundColor: Colours.appBarLight,
-      actionsIconTheme: IconThemeData(color: Colours.white),
-      titleTextStyle: TextStyle(
-        color: Colors.white,
-        fontSize: 24,
-        fontWeight: FontWeight.w600,
-      ),
-      iconTheme: IconThemeData(color: Colours.white),
-    ),
+    textTheme: AppTextTheme.light,
+    appBarTheme: MyAppBarTheme.light,
+    extensions: const [AppProductCardTheme.light],
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         surfaceTintColor: Colours.white,
@@ -50,7 +32,7 @@ class AppTheme {
       ),
     ),
     dividerTheme: const DividerThemeData(color: Colours.grey600),
-    dialogTheme: const DialogTheme(
+    dialogTheme: const DialogThemeData(
       insetPadding: EdgeInsets.zero,
       backgroundColor: Colours.scaffoldLight,
     ),
@@ -75,30 +57,7 @@ class AppTheme {
       color: Colours.white,
       surfaceTintColor: Colours.white,
     ),
-    inputDecorationTheme: InputDecorationTheme(
-      filled: true,
-      fillColor: Colours.textFieldLight,
-      counterStyle: const TextStyle(
-        color: Colours.primaryLight,
-        letterSpacing: 1,
-        fontWeight: FontWeight.w500,
-      ),
-      hintStyle: const TextStyle(color: Colours.grey600),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(30),
-        borderSide: const BorderSide(color: Colours.textFieldLight),
-      ),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(30),
-        borderSide: const BorderSide(color: Colours.textFieldLight),
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(30),
-        borderSide: const BorderSide(color: Colours.textFieldLight),
-      ),
-      suffixIconColor: Colours.black,
-      prefixIconColor: Colours.black,
-    ),
+    inputDecorationTheme: AppInputDecorationTheme.light,
   );
 
   static ThemeData dark = ThemeData(
@@ -109,36 +68,12 @@ class AppTheme {
     shadowColor: Colors.transparent,
     splashColor: Colors.transparent,
     primaryColor: Colours.primary,
-    colorScheme: Colours.colorSchemeDark,
+    colorScheme: AppColorScheme.dark,
     applyElevationOverlayColor: false,
     scaffoldBackgroundColor: Colours.scaffoldDark,
     splashFactory: NoSplash.splashFactory,
-    textTheme: const TextTheme(
-      headlineSmall: TextStyle(
-        color: Colours.grey200,
-        fontSize: 24,
-        fontWeight: FontWeight.w500,
-      ),
-      bodyLarge: TextStyle(color: Colours.grey100),
-      labelLarge: TextStyle(color: Colours.grey600),
-      titleSmall: TextStyle(
-        color: Colours.grey100,
-        fontWeight: FontWeight.w500,
-      ),
-      titleMedium: TextStyle(
-        color: Colours.grey600,
-        fontWeight: FontWeight.w500,
-        overflow: TextOverflow.ellipsis,
-      ),
-      labelSmall: TextStyle(
-        color: Colours.grey500,
-        overflow: TextOverflow.ellipsis,
-      ),
-      labelMedium: TextStyle(
-        color: Colours.grey100,
-        overflow: TextOverflow.ellipsis,
-      ),
-    ),
+    textTheme: AppTextTheme.dark,
+    extensions: const [AppProductCardTheme.dark],
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         surfaceTintColor: Colours.grey900,
@@ -146,7 +81,7 @@ class AppTheme {
       ),
     ),
     dividerTheme: const DividerThemeData(color: Colours.grey300),
-    dialogTheme: const DialogTheme(
+    dialogTheme: const DialogThemeData(
       insetPadding: EdgeInsets.zero,
       backgroundColor: Colours.grey900,
     ),
@@ -158,16 +93,7 @@ class AppTheme {
         fontFamily: Fonts.poppins,
       ),
     ),
-    appBarTheme: const AppBarTheme(
-      backgroundColor: Colours.appBarDark,
-      titleTextStyle: TextStyle(
-        color: Colors.white,
-        fontSize: 24,
-        fontWeight: FontWeight.w600,
-      ),
-      iconTheme: IconThemeData(color: Colors.white),
-      actionsIconTheme: IconThemeData(color: Colors.white),
-    ),
+    appBarTheme: MyAppBarTheme.dark,
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: Colours.primaryLight,
       foregroundColor: Colours.white,
@@ -180,30 +106,6 @@ class AppTheme {
     progressIndicatorTheme: const ProgressIndicatorThemeData(
       color: Colours.grey100,
     ),
-    dropdownMenuTheme: const DropdownMenuThemeData(),
-    inputDecorationTheme: InputDecorationTheme(
-      filled: true,
-      fillColor: Colours.textFieldDark,
-      counterStyle: const TextStyle(
-        color: Colours.primaryLight,
-        letterSpacing: 1,
-        fontWeight: FontWeight.w500,
-      ),
-      hintStyle: const TextStyle(color: Colours.grey600),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(20),
-        borderSide: const BorderSide(color: Colours.textFieldDark),
-      ),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(20),
-        borderSide: const BorderSide(color: Colours.textFieldDark),
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(20),
-        borderSide: const BorderSide(color: Colours.textFieldDark),
-      ),
-      suffixIconColor: Colours.white,
-      prefixIconColor: Colours.white,
-    ),
+    inputDecorationTheme: AppInputDecorationTheme.dark,
   );
 }

@@ -1,11 +1,11 @@
 import 'package:ecommerce_admin_app/core/app/utils/typedef.dart';
 import 'package:ecommerce_admin_app/src/auth/domain/entities/local_user.dart';
 
-class LocalUserModel extends LocalUser{
+class LocalUserModel extends LocalUser {
   const LocalUserModel({
-    required super.uid, 
-    required super.email, 
-    required super.name, 
+    required super.uid,
+    required super.email,
+    required super.name,
     super.image,
     super.bio,
     super.activeChatId,
@@ -14,29 +14,29 @@ class LocalUserModel extends LocalUser{
 
   const LocalUserModel.empty() : super.empty();
 
-  LocalUserModel.fromMap(SDMap map) : super(
-    uid:  map['uid'] as String,
-    email: map['email'] as String,
-    name: map['name'] as String,
-    image: map['image'] as String?,
-    bio: map['bio'] as String?,
-    activeChatId: map['activeChatId']  as String?,
-    fcmToken: map['fcmToken']  as String?,
-
-  );
+  LocalUserModel.fromMap(SDMap map)
+    : super(
+        uid: map['uid'] as String,
+        email: map['email'] as String,
+        name: map['name'] as String,
+        image: map['image'] as String?,
+        bio: map['bio'] as String?,
+        activeChatId: map['activeChatId'] as String?,
+        fcmToken: map['fcmToken'] as String?,
+      );
 
   LocalUserModel copyWith({
-    String? uid, 
+    String? uid,
     String? email,
-    String? name, 
+    String? name,
     String? image,
     String? bio,
     String? activeChatId,
     String? fcmToken,
-  }){
+  }) {
     return LocalUserModel(
       uid: uid ?? this.uid,
-      email: email ?? this.email, 
+      email: email ?? this.email,
       name: name ?? this.name,
       image: image ?? this.image,
       bio: bio ?? this.bio,
@@ -45,28 +45,27 @@ class LocalUserModel extends LocalUser{
     );
   }
 
-  SDMap toMap(){
+  SDMap toMap() {
     return {
-      'uid' : uid,
-      'email' : email,
-      'name' : name,
-      'image' : image,
-      'bio' : bio,
-      'activeChatId' : activeChatId,
-      'fcmToken' : fcmToken,
+      'uid': uid,
+      'email': email,
+      'name': name,
+      'image': image,
+      'bio': bio,
+      'activeChatId': activeChatId,
+      'fcmToken': fcmToken,
     };
   }
 
-  SDMap toMapLocal(){
+  SDMap toMapLocal() {
     return {
-      'uid' : uid,
-      'email' : email,
-      'name' : name,
-      'image' : image,
-      'bio' : bio,
-      'activeChatId' : activeChatId,
-      'fcmToken' : fcmToken,
+      'uid': uid,
+      'email': email,
+      'name': name,
+      'image': image,
+      'bio': bio,
+      'activeChatId': activeChatId,
+      'fcmToken': fcmToken,
     };
   }
-
 }

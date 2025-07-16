@@ -9,5 +9,4 @@ class StorageConst {
   static const String profileBox = 'profile_box';
   static const String themeBox = 'theme_box';
   static const String chatBox = 'chat_box';
-
 }

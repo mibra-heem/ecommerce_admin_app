@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:ecommerce_admin_app/core/app/resources/colours.dart';
-import 'package:ecommerce_admin_app/core/app/utils/core_utils.dart';
 import 'package:ecommerce_admin_app/core/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
@@ -12,6 +11,8 @@ class AddImageField extends StatefulWidget {
     this.images = const [],
     this.hintText,
     this.hintStyle,
+    this.onAddImage,
+    this.onRemoveImage,
     super.key,
   });
 
@@ -19,13 +20,14 @@ class AddImageField extends StatefulWidget {
   final List<File?> images;
   final String? hintText;
   final TextStyle? hintStyle;
+  final VoidCallback? onAddImage;
+  final void Function(int index)? onRemoveImage;
 
   @override
   State<AddImageField> createState() => _AddImageFieldState();
 }
 
 class _AddImageFieldState extends State<AddImageField> {
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -51,17 +53,7 @@ class _AddImageFieldState extends State<AddImageField> {
             ),
             IconButton(
               padding: EdgeInsets.zero,
-              onPressed:
-                  widget.images.length >= 5
-                      ? null
-                      : () async {
-                        final image = await CoreUtils.pickImage();
-                        if (image != null) {
-                          setState(() {
-                            widget.images.add(image);
-                          });
-                        }
-                      },
+              onPressed: widget.onAddImage,
               icon: Container(
                 height: 50,
                 width: 50,
@@ -72,7 +64,7 @@ class _AddImageFieldState extends State<AddImageField> {
                           ? context.color.secondary
                           : widget.images.length < 5
                           ? Colours.primaryLight
-                          : Colours.grey600,
+                          : Colours.disable,
                 ),
                 child: Icon(
                   Icons.add_a_photo_rounded,
@@ -131,9 +123,7 @@ class _AddImageFieldState extends State<AddImageField> {
                             context: context,
                             builder: (context) {
                               return Dialog(
-                                child: Image.file(
-                                  widget.images[index]!,
-                                ),
+                                child: Image.file(widget.images[index]!),
                               );
                             },
                           );
@@ -163,9 +153,7 @@ class _AddImageFieldState extends State<AddImageField> {
                             size: 18,
                           ),
                           onPressed: () {
-                            setState(() {
-                              widget.images.removeAt(index);
-                            });
+                            widget.onRemoveImage!(index);
                           },
                         ),
                       ),

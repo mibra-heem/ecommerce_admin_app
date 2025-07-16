@@ -1,14 +1,18 @@
 import 'package:ecommerce_admin_app/core/constants/route_const.dart';
 import 'package:ecommerce_admin_app/core/services/dependency_injection.dart';
+import 'package:ecommerce_admin_app/src/banner/presentation/bloc/banner_bloc.dart';
 import 'package:ecommerce_admin_app/src/banner/presentation/provider/banner_provider.dart';
 import 'package:ecommerce_admin_app/src/banner/presentation/views/banner_view.dart';
+import 'package:ecommerce_admin_app/src/category/domain/entities/category.dart';
+import 'package:ecommerce_admin_app/src/category/presentation/bloc/category_bloc.dart';
 import 'package:ecommerce_admin_app/src/category/presentation/provider/category_provider.dart';
+import 'package:ecommerce_admin_app/src/category/presentation/views/category_form_view.dart';
 import 'package:ecommerce_admin_app/src/category/presentation/views/category_view.dart';
 import 'package:ecommerce_admin_app/src/dashboard/presentation/view/dashboard.dart';
+import 'package:ecommerce_admin_app/src/home/presentation/views/home_view.dart';
+import 'package:ecommerce_admin_app/src/product/domain/entities/product.dart';
 import 'package:ecommerce_admin_app/src/product/presentation/bloc/product_bloc.dart';
-import 'package:ecommerce_admin_app/src/product/presentation/provider/product_create_provider.dart';
-import 'package:ecommerce_admin_app/src/product/presentation/provider/product_provider.dart';
-import 'package:ecommerce_admin_app/src/product/presentation/views/product_create_view.dart';
+import 'package:ecommerce_admin_app/src/product/presentation/views/product_form_view.dart';
 import 'package:ecommerce_admin_app/src/product/presentation/views/product_view.dart';
 import 'package:ecommerce_admin_app/src/splash/presentation/views/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -34,55 +38,14 @@ final GoRouter router = GoRouter(
       path: RoutePath.initial,
       name: RouteName.initial,
       redirect: (context, state) {
-        // if (sl<FirebaseAuth>().currentUser != null) {
-        //   debugPrint('Before startListening method................');
-        //   // sl<ThemeProvider>().loadTheme();
-        //   // sl<AudioCallProvider>().listeningForCall(context);
-        //   // sl<AudioCallProvider>().listeningToCallReject(context);
-        //   // sl<AudioCallProvider>().listenToCallerHangupBeforeAnswer(context);
-
-        //   return RoutePath.chat;
-        // }
         return RoutePath.home;
       },
     ),
-    // GoRoute(
-    //   path: RoutePath.signIn,
-    //   name: RouteName.signIn,
-    //   builder:
-    //       (context, state) => BlocProvider(
-    //         create: (context) => sl<AuthBloc>(),
-    //         child: const SignInScreen(),
-    //       ),
-    // ),
-    // GoRoute(
-    //   path: RoutePath.signUp,
-    //   name: RouteName.signUp,
-    //   builder:
-    //       (context, state) => BlocProvider(
-    //         create: (context) => sl<AuthBloc>(),
-    //         child: const SignUpScreen(),
-    //       ),
-    // ),
-    // GoRoute(
-    //   path: RoutePath.forgetPassword,
-    //   name: RouteName.forgetPassword,
-    //   builder:
-    //       (context, state) => BlocProvider(
-    //         create: (context) => sl<AuthBloc>(),
-    //         child: const ForgotPasswordScreen(),
-    //       ),
-    // ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, shell) {
-        return BlocProvider(
-          create: (context) => sl<ProductBloc>(),
-          child: MultiProvider(
-            providers: [
-              ChangeNotifierProvider(create: (_) => sl<CategoryProvider>()),
-            ],
-            child: Dashboard(shell: shell),
-          ),
+        return ChangeNotifierProvider(
+          create: (_) => sl<CategoryProvider>()..getCategoriesHandler(),
+          child: Dashboard(shell: shell),
         );
       },
       branches: [
@@ -92,8 +55,10 @@ final GoRouter router = GoRouter(
               path: RoutePath.product,
               name: RouteName.product,
               builder:
-                  (context, state) => ChangeNotifierProvider(
-                    create: (context) => sl<ProductProvider>(),
+                  (context, state) => BlocProvider(
+                    create:
+                        (context) =>
+                            sl<ProductBloc>()..add(const GetProductsEvent()),
                     child: const ProductView(),
                   ),
               routes: [
@@ -103,16 +68,25 @@ final GoRouter router = GoRouter(
                   pageBuilder:
                       (context, state) => NoTransitionPage(
                         key: state.pageKey,
-                        child: ChangeNotifierProvider(
-                          create: (context) => sl<ProductCreateProvider>(),
-                          child: const ProductCreateView(),
+                        child: BlocProvider(
+                          create: (context) => sl<ProductBloc>(),
+                          child: const ProductFormView(),
                         ),
                       ),
                 ),
                 GoRoute(
                   path: RoutePath.productEdit,
                   name: RouteName.productEdit,
-                  builder: (context, state) => const Placeholder(),
+                  pageBuilder: (context, state) {
+                    final product = state.extra! as Product;
+                    return NoTransitionPage(
+                      key: state.pageKey,
+                      child: BlocProvider(
+                        create: (context) => sl<ProductBloc>(),
+                        child: ProductFormView(product: product),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
@@ -128,12 +102,29 @@ final GoRouter router = GoRouter(
             GoRoute(
               path: RoutePath.categoryCreate,
               name: RouteName.categoryCreate,
-              builder: (context, state) => const Placeholder(),
+              pageBuilder: (context, state) {
+                return NoTransitionPage(
+                  key: state.pageKey,
+                  child: BlocProvider(
+                    create: (context) => sl<CategoryBloc>(),
+                    child: const CategoryFormView(),
+                  ),
+                );
+              },
             ),
             GoRoute(
               path: RoutePath.categoryEdit,
               name: RouteName.categoryEdit,
-              builder: (context, state) => const Placeholder(),
+              pageBuilder: (context, state) {
+                final category = state.extra! as CategoryEntity;
+                return NoTransitionPage(
+                  key: state.pageKey,
+                  child: BlocProvider(
+                    create: (context) => sl<CategoryBloc>(),
+                    child: CategoryFormView(category: category),
+                  ),
+                );
+              },
             ),
           ],
         ),
@@ -142,7 +133,7 @@ final GoRouter router = GoRouter(
             GoRoute(
               path: RoutePath.home,
               name: RouteName.home,
-              builder: (context, state) => const Placeholder(),
+              builder: (context, state) => const HomeView(),
             ),
           ],
         ),
@@ -152,15 +143,16 @@ final GoRouter router = GoRouter(
               path: RoutePath.banner,
               name: RouteName.banner,
               builder:
-                  (context, state) => ChangeNotifierProvider(
-                    create: (_) => sl<BannerProvider>(),
+                  (context, state) => BlocProvider(
+                    create: (_) => sl<BannerBloc>(),
                     child: const BannerView(),
                   ),
             ),
             GoRoute(
               path: RoutePath.bannerCreate,
               name: RouteName.bannerCreate,
-              builder: (context, state) => const Placeholder(),
+              builder:
+                  (context, state) => const Placeholder(),
             ),
             GoRoute(
               path: RoutePath.bannerEdit,

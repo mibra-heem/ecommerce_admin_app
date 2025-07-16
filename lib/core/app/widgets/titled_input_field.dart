@@ -25,7 +25,7 @@ class TitledInputField extends StatelessWidget {
   final String? counterText;
   final TextStyle? hintStyle;
   final TextStyle? counterStyle;
-  final Widget? suffixIcon; 
+  final Widget? suffixIcon;
   final int? maxLength;
   final int? maxLines;
   final bool required;
@@ -37,7 +37,7 @@ class TitledInputField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        FieldLabel(title: title, required: required,),
+        FieldLabel(title: title, required: required),
         const SizedBox(height: 10),
         MyField(
           controller: controller,
@@ -50,9 +50,9 @@ class TitledInputField extends StatelessWidget {
           counterStyle: counterStyle,
           overrideValidator: true,
           isTextArea: isTextArea,
-          validator: (value){
-            if(!required) return null;
-            if(value == null || value == ''){
+          validator: (value) {
+            if (!required) return null;
+            if (value == null || value == '') {
               return 'This field is required.';
             }
             return null;

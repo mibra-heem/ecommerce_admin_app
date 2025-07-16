@@ -1,4 +1,3 @@
-
 extension StringExtention on String {
   String get obscureEmail {
     // split the email into username and domain
@@ -34,5 +33,4 @@ extension StringExtention on String {
 
     return '$firstLetter$withoutFirstLetter';
   }
-
 }

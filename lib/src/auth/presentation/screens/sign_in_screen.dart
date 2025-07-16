@@ -44,7 +44,7 @@ class _SignInScreenState extends State<SignInScreen> {
           } else if (state is SignedIn) {
             sl<UserProvider>().cacheUserData(state.user);
             context.goNamed(RouteName.initial);
-      
+
             if (kDebugMode) print('........ Signed In successfully ........');
           }
         },
@@ -58,9 +58,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   const Image(
                     height: 150,
                     width: 150,
-                    image: AssetImage(
-                      MediaRes.appPurpleIcon,
-                    ),
+                    image: AssetImage(MediaRes.appPurpleIcon),
                   ),
                   const SizedBox(height: 30),
                   const Text(
@@ -134,13 +132,9 @@ class _SignInScreenState extends State<SignInScreen> {
                   const Row(
                     spacing: 12,
                     children: <Widget>[
-                      Expanded(
-                        child: Divider(thickness: 1),
-                      ),
+                      Expanded(child: Divider(thickness: 1)),
                       Text('OR'),
-                      Expanded(
-                        child: Divider(thickness: 1),
-                      ),
+                      Expanded(child: Divider(thickness: 1)),
                     ],
                   ),
                   const SizedBox(height: 20),
@@ -167,7 +161,6 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                     ],
                   ),
-                  
                 ],
               ),
             ),

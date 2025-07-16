@@ -54,6 +54,7 @@ class _DashboardState extends State<Dashboard> {
         }
       },
       child: Scaffold(
+        // backgroundColor: Colours.scaffoldLight,
         body: widget.shell,
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: widget.shell.currentIndex,

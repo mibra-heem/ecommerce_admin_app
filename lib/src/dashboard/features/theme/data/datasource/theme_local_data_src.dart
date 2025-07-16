@@ -32,8 +32,7 @@ class ThemeLocalDataSrcImpl implements ThemeLocalDataSrc {
   @override
   Future<int> loadThemeMode() async {
     try {
-      return _themeBox.get(StorageConst.theme) as int? ??
-          ThemeMode.system.index;
+      return _themeBox.get(StorageConst.theme) as int? ?? ThemeMode.light.index;
     } catch (e, s) {
       debugPrintStack(stackTrace: s);
       throw CacheException(

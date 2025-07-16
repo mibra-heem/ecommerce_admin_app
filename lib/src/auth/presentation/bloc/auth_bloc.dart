@@ -21,12 +21,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     required SignUp signUp,
     required ForgotPassword forgotPassword,
     required UpdateUser updateUser,
-  })  : _googleSignIn = googleSignIn,
-        _signUp = signUp,
-        _signIn = signIn,
-        _forgotPassword = forgotPassword,
-        _updateUser = updateUser,
-        super(AuthInitial()) {
+  }) : _googleSignIn = googleSignIn,
+       _signUp = signUp,
+       _signIn = signIn,
+       _forgotPassword = forgotPassword,
+       _updateUser = updateUser,
+       super(AuthInitial()) {
     on<AuthEvent>((event, emit) {
       emit(const AuthLoading());
     });
@@ -60,10 +60,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) async {
     final result = await _signIn(
-      SignInParams(
-        email: event.email,
-        password: event.password,
-      ),
+      SignInParams(email: event.email, password: event.password),
     );
 
     result.fold(
@@ -109,10 +106,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) async {
     final result = await _updateUser(
-      UpdateUserParams(
-        action: event.action,
-        userData: event.userData,
-      ),
+      UpdateUserParams(action: event.action, userData: event.userData),
     );
 
     result.fold(
@@ -120,5 +114,4 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       (_) => emit(const UserUpdated()),
     );
   }
-
 }

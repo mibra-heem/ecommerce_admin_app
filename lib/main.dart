@@ -1,4 +1,5 @@
 import 'package:ecommerce_admin_app/core/app/themes/app_theme.dart';
+import 'package:ecommerce_admin_app/core/extensions/context_extension.dart';
 import 'package:ecommerce_admin_app/core/services/dependency_injection.dart';
 import 'package:ecommerce_admin_app/core/services/go_router.dart';
 import 'package:ecommerce_admin_app/src/dashboard/features/theme/presentation/provider/theme_provider.dart';
@@ -31,7 +32,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp.router(
       routerConfig: router,
       debugShowCheckedModeBanner: false,
-      themeMode: Provider.of<ThemeProvider>(context).themeMode,
+      themeMode: context.themeMode,
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
     );

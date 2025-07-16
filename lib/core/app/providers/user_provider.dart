@@ -22,7 +22,7 @@ class UserProvider extends ChangeNotifier {
 
   bool get isUserLoading => _isUserLoading;
 
-  set isUserLoading(bool loading){
+  set isUserLoading(bool loading) {
     _isUserLoading = loading;
     notifyListeners();
   }
@@ -39,7 +39,6 @@ class UserProvider extends ChangeNotifier {
   }
 
   Future<void> getUserCachedData() async {
-
     isUserLoading = true;
 
     final result = await _getUserCachedData();
@@ -62,7 +61,6 @@ class UserProvider extends ChangeNotifier {
 
     result.fold((failure) {
       if (kDebugMode) print(failure.errorMessage);
-    }, (_) {
-    },);
+    }, (_) {});
   }
 }

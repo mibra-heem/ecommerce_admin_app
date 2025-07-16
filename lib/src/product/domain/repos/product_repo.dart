@@ -5,7 +5,6 @@ abstract class ProductRepo {
   const ProductRepo();
   RFuture<List<Product>> getProducts();
   RFuture<void> storeProduct(Product product);
-  RFuture<void> updateProduct(Product product);
-  RFuture<void> deleteProduct();
-
+  RFuture<void> updateProduct({required String id, required SDMap updates});
+  RFuture<void> deleteProduct(String id);
 }

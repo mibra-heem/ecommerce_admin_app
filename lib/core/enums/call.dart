@@ -8,7 +8,4 @@ enum CallStatus {
   missed,
 }
 
-enum CallType{
-  audio,
-  video,
-}
+enum CallType { audio, video }

@@ -35,8 +35,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         listener: (_, state) {
           if (state is AuthError) {
             CoreUtils.showSnackbar(context, 'Error While forgot password');
-          } else if (state is ForgotPasswordSent) {
-          }
+          } else if (state is ForgotPasswordSent) {}
         },
         builder: (_, state) {
           return GradientBackground(

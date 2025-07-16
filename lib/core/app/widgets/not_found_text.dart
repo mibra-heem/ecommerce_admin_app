@@ -2,9 +2,7 @@ import 'package:ecommerce_admin_app/core/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
 
 class NotFoundText extends StatelessWidget {
-  const NotFoundText( this.title, {
-    super.key,
-  });
+  const NotFoundText(this.title, {super.key});
 
   final String title;
 

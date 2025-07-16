@@ -2,38 +2,31 @@ import 'package:ecommerce_admin_app/src/banner/domain/entities/banner.dart';
 
 class BannerModel extends BannerEntity {
   const BannerModel({
-    required super.id,
-    required super.categoryId,
     required super.image,
+    super.id,
+    super.isActive,
   });
 
   const BannerModel.empty() : super.empty();
 
   factory BannerModel.fromJson(Map<String, dynamic> data) {
     return BannerModel(
-      id: data['id'] as int,
-      categoryId: data['category_id'] as int,
+      id: data['id'] as int?,
       image: data['image'] as String,
+      isActive: data['is_active'] as bool,
     );
   }
 
-  BannerModel copyWith({
-    int? id,
-    int? categoryId,
-    String? image,
-  }) {
+  BannerModel copyWith({int? id, String? image, bool? isActive}) {
     return BannerModel(
       id: id ?? this.id,
-      categoryId: categoryId ?? this.categoryId,
       image: image ?? this.image,
+      isActive: isActive ?? this.isActive,
+
     );
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'category_id': categoryId,
-      'image': image,
-    };
+    return {'id': id, 'is_active': isActive, 'image': image};
   }
 }

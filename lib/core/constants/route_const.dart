@@ -1,4 +1,4 @@
-class RoutePath{
+class RoutePath {
   const RoutePath._();
 
   // Full screen routes section
@@ -8,7 +8,7 @@ class RoutePath{
   static const signUp = '/sign-up';
   static const forgetPassword = '/forget-password';
   static const dashboard = '/dashboard';
-  
+
   // Tab view routes section
   static const home = '/home';
   static const product = '/product';
@@ -17,8 +17,8 @@ class RoutePath{
   static const profile = '/profile';
 
   // Nested Tab view routes for product
-  static const productCreate = '/product/create';
-  static const productEdit = '/product/:id/edit';
+  static const productCreate = '/create';
+  static const productEdit = '/:id/edit';
 
   // Nested Tab view routes for product
   static const categoryCreate = '/category/create';
@@ -34,10 +34,9 @@ class RoutePath{
   static const notification = '$profile/notiflcation';
   static const privacy = '$profile/privacy';
   static const favourite = '$profile/favourite';
-
 }
 
-class RouteName{
+class RouteName {
   const RouteName._();
 
   // Full screen routes section
@@ -73,5 +72,4 @@ class RouteName{
   static const notification = 'notiflcation';
   static const privacy = 'privacy';
   static const favourite = 'favourite';
-
 }

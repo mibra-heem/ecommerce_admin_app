@@ -3,12 +3,11 @@ import 'package:ecommerce_admin_app/core/app/utils/typedef.dart';
 import 'package:ecommerce_admin_app/src/auth/domain/repos/auth_repo.dart';
 import 'package:equatable/equatable.dart';
 
-class SignUp extends UseCaseWithParams<void,SignUpParams>{
-
+class SignUp extends UseCaseWithParams<void, SignUpParams> {
   SignUp(this._repo);
 
   final AuthRepo _repo;
-  
+
   @override
   RFuture<void> call(SignUpParams params) => _repo.signUp(
     email: params.email,
@@ -17,15 +16,14 @@ class SignUp extends UseCaseWithParams<void,SignUpParams>{
   );
 }
 
-class SignUpParams extends Equatable{
-
+class SignUpParams extends Equatable {
   const SignUpParams({
     required this.name,
     required this.email,
     required this.password,
   });
 
-  const SignUpParams.empty(): this(email: '', name: '',  password: '');
+  const SignUpParams.empty() : this(email: '', name: '', password: '');
 
   final String email;
   final String name;
@@ -33,5 +31,4 @@ class SignUpParams extends Equatable{
 
   @override
   List<Object?> get props => [email, name, password];
-
 }

@@ -10,6 +10,9 @@ class Colours {
     Color(0xFFFDFAE1),
   ];
 
+  static const List<Color> productCardGradientLight = [grey100, grey300];
+  static const List<Color> productCardGradientDark = [black, grey800];
+
   // Main colors
   static const primary = Color(0xFF14823C);
   static const primaryLight = Color(0xFF34A33C);
@@ -25,7 +28,7 @@ class Colours {
   static const black = Color(0xFF000000);
   static const grey = Color(0xFF9E9E9E);
 
-  // Shades 
+  // Shades
   static const grey100 = Color(0xFFF5F5F5);
   static const grey200 = Color(0xFFEEEEEE);
   static const grey300 = Color(0xFFE0E0E0);
@@ -39,37 +42,23 @@ class Colours {
   static const textFieldLight = Color(0xFFDADADA);
   static const textFieldDark = Color(0xFF1E1E1E);
 
-  static const scaffoldLight = Color(0xFFEFEFEE);
+  static const scaffoldLight = Color(0xFEEFEFEE);
   static const scaffoldDark = Color(0xFF121212);
 
-  static const appBarLight = primary;
-  static const appBarDark = Color(0xFF1C1C1C);
+  static const Color appBarLight = primary;
+  // static const appBarDark = Color(0xFF1C1C1C);
+  static const Color appBarDark = primary;
 
   static const navBarLight = Color(0xFFF7F7F7);
   static const navBarDark = Color(0xFF181818);
 
-  static const tileLight = white;
+  static const Color tileLight = white;
   static const tileDark = Color(0xFF1E1E1E);
 
   // Utility Colors
-  static const success = Colors.green;
-  static const danger = Colors.red;
-  static const disable = Colors.grey;
-
-  static const colorSchemeLight = ColorScheme.light(
-    primary: primary,
-    onPrimary: grey100,
-    primaryContainer: primaryLight,
-    secondary: grey900,
-    onSecondary: grey100,
-  );
-
-  static const colorSchemeDark = ColorScheme.dark(
-    primary: primary,
-    onPrimary: grey100,
-    primaryContainer: primaryLight,
-    secondary: grey100,
-    onSecondary: grey900,
-  );
-
+  static const success = Color(0xFF34A33C);
+  static const info = Color(0xFF3498DB);
+  static const warning = Color(0xFFF39C12);
+  static const danger = Color(0xFFE74C3C);
+  static const disable = Color(0xFF7D7D7D);
 }

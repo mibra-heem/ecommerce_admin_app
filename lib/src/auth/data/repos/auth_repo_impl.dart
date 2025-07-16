@@ -20,7 +20,6 @@
 //   // final AuthRemoteDataSource _remoteDataSource;
 //   final AuthLocalDataSource _localDataSource;
 
-
 //   @override
 //   RFuture<void> forgotPassword(String email) async{
 
@@ -49,12 +48,12 @@
 //       return Left(ServerFailure(message: e.message, statusCode: e.statusCode));
 
 //     }
-//   }  
+//   }
 
 //   @override
 //   RFuture<LocalUser> signIn(
 //     {
-//       required String email, 
+//       required String email,
 //       required String password,
 //     }) async{
 
@@ -76,8 +75,8 @@
 //   @override
 //   RFuture<void> signUp(
 //     {
-//       required String email, 
-//       required String fullName, 
+//       required String email,
+//       required String fullName,
 //       required String password,
 //     })async {
 
@@ -104,7 +103,7 @@
 //       required UpdateUserAction action,
 //       dynamic userData,
 //     }) async{
-    
+
 //     try{
 //       await _remoteDataSource.updateUser(
 //         action : action,
@@ -119,7 +118,7 @@
 
 //     }
 //   }
-  
+
 //   @override
 //   RFuture<void> cacheUserData(LocalUser user) async{
 //     try{
@@ -133,7 +132,7 @@
 
 //     }
 //   }
-  
+
 //   @override
 //   RFuture<LocalUser> getUserCachedData() async{
 //     try{

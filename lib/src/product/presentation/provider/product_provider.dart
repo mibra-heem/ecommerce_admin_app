@@ -1,29 +1,15 @@
-import 'package:ecommerce_admin_app/src/product/domain/entities/product.dart';
-import 'package:ecommerce_admin_app/src/product/domain/usecases/get_products.dart';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 class ProductProvider extends ChangeNotifier {
-  ProductProvider({
-    required GetProducts getProducts,
-  })  : _getProducts = getProducts;
+  ProductProvider();
 
-  final GetProducts _getProducts;
+  final List<File?> _images = [];
+  List<File?> get images => _images;
 
-  List<Product> _products = [];
-  List<Product> get products => _products;
-
-  Future<void> getProductsHandler() async {
-    final result = await _getProducts();
-
-    result.fold(
-      (failure) => debugPrint(failure.errorMessage),
-      (products) {
-        debugPrint('Products fetched successfully.');
-        _products = products;
-        debugPrint('$_products');
-        notifyListeners();
-      },
-    );
+  void addImage(File image) {
+    _images.add(image);
+    notifyListeners();
   }
-  
 }

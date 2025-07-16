@@ -100,8 +100,8 @@ class AppDialogBox extends StatelessWidget {
               ),
             Text(
               isMessageDialog
-                  ? content ?? 'message has been sent'
-                  : content ?? 'Are you sure? you want to exit the app.',
+                  ? content ?? 'message has been sent.'
+                  : content ?? 'Are you sure? you want to delete this item.',
               style: const TextStyle(fontSize: 14),
             ),
 
@@ -112,7 +112,7 @@ class AppDialogBox extends StatelessWidget {
                   onPressed: onConfirm,
                   style: TextButton.styleFrom(
                     backgroundColor: onConfirmColor,
-                    foregroundColor: onConfirmTextColor,
+                    foregroundColor: Colors.white,
                     splashFactory: InkRipple.splashFactory,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(
@@ -122,7 +122,7 @@ class AppDialogBox extends StatelessWidget {
                   ),
                   child: Text(
                     confirmText,
-                    // style: const TextStyle(color: Colors.black),
+                    style: TextStyle(color: onConfirmTextColor),
                   ),
                 ),
                 const SizedBox(width: 15),
@@ -130,8 +130,7 @@ class AppDialogBox extends StatelessWidget {
                   const SizedBox()
                 else
                   TextButton(
-                    onPressed:
-                        onCancel ?? () => context.pop(false),
+                    onPressed: onCancel ?? () => context.pop(false),
                     style: TextButton.styleFrom(
                       backgroundColor: onCancelColor,
                       foregroundColor: onCancelTextColor,

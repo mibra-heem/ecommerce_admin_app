@@ -1,32 +1,24 @@
 import 'package:equatable/equatable.dart';
 
-class BannerEntity extends Equatable{
-
+class BannerEntity extends Equatable {
   const BannerEntity({
-    required this.id,
-    required this.categoryId,
     required this.image,
+    this.id,
+    this.isActive = true,
   });
 
-  const BannerEntity.empty() : this(
-    id: 0,
-    categoryId: 1,
-    image: 'banner.image',
-  );
+  const BannerEntity.empty()
+    : this(image: 'banner.image');
 
-  final int id;
-  final int categoryId;
+  final int? id;
   final String image;
+  final bool isActive;
 
   @override
-  List<Object?> get props => [
-    id, categoryId, image,
-  ];
+  List<Object?> get props => [id, image, isActive];
 
   @override
-  String toString(){
-    return 'Banner{id: $id, categoryId: $categoryId, image : $image}';
+  String toString() {
+    return 'Banner{id: $id, image: $image, isActive: $isActive}';
   }
-
-
 }

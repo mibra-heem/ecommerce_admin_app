@@ -14,7 +14,7 @@ extension DatetimeExtension on DateTime {
     return formattedTime;
   }
 
-  String get relativeDayLabel  {
+  String get relativeDayLabel {
     final now = DateTime.now();
     final messageDate = DateTime(year, month, day);
     final nowDate = DateTime(now.year, now.month, now.day);
@@ -25,9 +25,9 @@ extension DatetimeExtension on DateTime {
       return 'Today';
     } else if (difference == 1) {
       return 'Yesterday';
-    } else if(difference < 7) {
+    } else if (difference < 7) {
       return weekdayName;
-    }else {
+    } else {
       return dateFormat;
     }
   }

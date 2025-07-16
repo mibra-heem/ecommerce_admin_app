@@ -1,36 +1,37 @@
-import 'package:ecommerce_admin_app/core/app/resources/colours.dart';
-import 'package:ecommerce_admin_app/core/app/widgets/rounded_button.dart';
-import 'package:ecommerce_admin_app/core/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:iconly/iconly.dart';
 
-class CardButtonsRow extends StatelessWidget {
-  const CardButtonsRow({super.key});
+class CardActionButtons extends StatelessWidget {
+  const CardActionButtons({
+    super.key,
+    this.onView,
+    this.onEdit,
+    this.onDelete,
+    this.isViewOn = true,
+  });
+
+  final VoidCallback? onView;
+  final VoidCallback? onEdit;
+  final VoidCallback? onDelete;
+  final bool isViewOn;
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      spacing: 10,
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        Expanded(
-          child: RoundedButton(
-            'View', 
-            labelColor: Colors.blueAccent,
-            onPressed: (){},
+        if (isViewOn)
+          IconButton(
+            icon: const Icon(IconlyBold.show, color: Colors.blueAccent),
+            onPressed: onView,
           ),
+        IconButton(
+          icon: const Icon(IconlyBold.edit, color: Colors.amber),
+          onPressed: onEdit,
         ),
-        Expanded(
-          child: RoundedButton(
-            'Edit', 
-            labelColor: context.color.primary,
-            onPressed: (){},
-          ),
-        ),
-        Expanded(
-          child: RoundedButton(
-            'Delete', 
-            labelColor: Colours.danger,
-            onPressed: (){},
-          ),
+        IconButton(
+          icon: const Icon(IconlyBold.delete, color: Colors.red),
+          onPressed: onDelete,
         ),
       ],
     );

@@ -1,4 +1,5 @@
 import 'package:ecommerce_admin_app/core/app/resources/colours.dart';
+import 'package:ecommerce_admin_app/core/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
 
 class RoundedButton extends StatelessWidget {
@@ -29,7 +30,7 @@ class RoundedButton extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         elevation: elevation,
-        backgroundColor: buttonColor ?? Colours.grey900,
+        backgroundColor: buttonColor ?? context.color.onSecondary,
         foregroundColor: labelColor ?? Colours.grey100,
         padding: padding,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(90)),
