@@ -12,8 +12,8 @@ class ApiConst {
   static const patch = 'PATCH';
   static const delete = 'DELETE';
 
-  static const baseUrl = 'http://192.168.18.86:8000';
-  // static String baseUrl = dotenv.env['BASE_URL'] ?? '';
+  // static const baseUrl = 'http://192.168.18.86:8000';
+  static String baseUrl = dotenv.env['BASE_URL'] ?? '';
 
   // Banner Api's
   static const bannersUrl = '/api/banners';
