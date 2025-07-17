@@ -28,7 +28,7 @@ class ProductModel extends Product {
               ? List<String>.from(data['images'] as List)
               : null,
       description: data['description'] as String?,
-      isActive: CoreUtils.toBoolean((data['is_active'] ?? 1) as int),
+      isActive: CoreUtils.toBoolean(data['is_active'] as int),
     );
   }
 

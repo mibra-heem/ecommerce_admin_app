@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce_admin_app/core/app/resources/colours.dart';
 import 'package:ecommerce_admin_app/core/app/widgets/expandable_text.dart';
 import 'package:ecommerce_admin_app/core/constants/api_const.dart';
@@ -18,37 +20,80 @@ class ViewModalBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final hasImage = product.images?.isNotEmpty ?? false;
-    final imageUrl = hasImage ? ApiConst.baseUrl + product.images!.first : null;
+    final hasImages = product.images?.isNotEmpty ?? false;
+
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 20, 16, 32),
       child: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Product Image
-            Center(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child:
-                    hasImage
-                        ? Image.network(
-                          imageUrl!,
-                          height: 180,
-                          fit: BoxFit.cover,
-                        )
-                        : Container(
-                          height: 180,
-                          color: Colours.grey200,
-                          alignment: Alignment.center,
-                          child: const Icon(Icons.image_not_supported),
-                        ),
+            // ✅ Product Images (Carousel)
+            if (hasImages)
+              Center(
+                child: SizedBox(
+                  height: 220,
+                  width: 220,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(
+                      16,
+                    ), // Apply to the whole carousel
+                    child: CarouselSlider(
+                      options: CarouselOptions(
+                        viewportFraction: 1,
+                        enableInfiniteScroll: product.images!.length > 1,
+                        autoPlay: product.images!.length > 1,
+                        autoPlayInterval: const Duration(seconds: 5),
+                        autoPlayCurve: Curves.easeInOut,
+                      ),
+                      items:
+                          product.images!.map((img) {
+                            return GestureDetector(
+                              onTap: () {
+                                _openFullScreenImage(
+                                  context,
+                                  ApiConst.baseUrl + img,
+                                );
+                              },
+                              child: CachedNetworkImage(
+                                imageUrl: ApiConst.baseUrl + img,
+                                width: double.infinity,
+                                fit: BoxFit.cover,
+                                placeholder:
+                                    (_, _) => const Center(
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 2,
+                                      ),
+                                    ),
+                                errorWidget:
+                                    (_, _, _) => Container(
+                                      color: Colours.grey200,
+                                      alignment: Alignment.center,
+                                      child: const Icon(
+                                        Icons.broken_image,
+                                        size: 40,
+                                      ),
+                                    ),
+                              ),
+                            );
+                          }).toList(),
+                    ),
+                  ),
+                ),
+              )
+            else
+              Container(
+                height: 180,
+                color: Colours.grey200,
+                alignment: Alignment.center,
+                child: const Icon(Icons.image_not_supported, size: 40),
               ),
-            ),
+
             const SizedBox(height: 16),
 
-            // Product Name & ID
+            // ✅ Product Name & ID
             Text(
               product.name,
               style: context.text.headlineSmall?.copyWith(
@@ -65,7 +110,7 @@ class ViewModalBottomSheet extends StatelessWidget {
 
             const SizedBox(height: 12),
 
-            // Price & Category
+            // ✅ Price & Category
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -90,7 +135,7 @@ class ViewModalBottomSheet extends StatelessWidget {
 
             const SizedBox(height: 12),
 
-            // Stock & Status
+            // ✅ Stock & Status (Same as before)
             Row(
               children: [
                 Icon(
@@ -110,53 +155,23 @@ class ViewModalBottomSheet extends StatelessWidget {
                 ),
                 const SizedBox(width: 16),
                 Icon(
-                  index.isEven ? Icons.toggle_on : Icons.toggle_off,
-                  color: index.isEven ? Colours.success : Colors.grey,
+                  product.isActive ? Icons.toggle_on : Icons.toggle_off,
+                  color: product.isActive ? Colours.success : Colours.danger,
                   size: 24,
                 ),
                 const SizedBox(width: 6),
                 Text(
-                  index.isEven ? 'Active' : 'Inactive',
+                  product.isActive ? 'Active' : 'Inactive',
                   style: TextStyle(
-                    color: index.isEven ? Colours.success : Colours.disable,
+                    color: product.isActive ? Colours.success : Colours.danger,
                   ),
-                ),
-              ],
-            ),
-
-            const SizedBox(height: 12),
-
-            // Rating, Sold, and Reviews
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Icon(Icons.star, color: Colors.amber, size: 20),
-                    SizedBox(width: 4),
-                    Text('4.5'),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Icon(Icons.shopping_bag, size: 20),
-                    SizedBox(width: 4),
-                    Text('Sold: 5k'),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Icon(Icons.reviews, size: 20),
-                    SizedBox(width: 4),
-                    Text('Good Product Reviews'),
-                  ],
                 ),
               ],
             ),
 
             const SizedBox(height: 20),
 
-            // Description
+            // ✅ Description
             Text(
               'Description',
               style: context.text.titleMedium?.copyWith(
@@ -170,6 +185,35 @@ class ViewModalBottomSheet extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  void _openFullScreenImage(BuildContext context, String imageUrl) {
+    Navigator.push(
+      context,
+      MaterialPageRoute<void>(
+        builder:
+            (_) => Scaffold(
+              backgroundColor: Colors.black,
+              appBar: AppBar(
+                backgroundColor: Colors.black,
+                iconTheme: const IconThemeData(color: Colors.white),
+                elevation: 0,
+              ),
+              body: Center(
+                child: InteractiveViewer(
+                  child: CachedNetworkImage(
+                    imageUrl: imageUrl,
+                    fit: BoxFit.contain,
+                    placeholder: (_, _) => const CircularProgressIndicator(),
+                    errorWidget:
+                        (_, _, _) =>
+                            const Icon(Icons.broken_image, color: Colors.white),
+                  ),
+                ),
+              ),
+            ),
       ),
     );
   }

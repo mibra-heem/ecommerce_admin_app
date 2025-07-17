@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:ecommerce_admin_app/core/app/resources/colours.dart';
 import 'package:ecommerce_admin_app/core/app/utils/core_utils.dart';
 import 'package:ecommerce_admin_app/core/app/widgets/add_image_field.dart';
+import 'package:ecommerce_admin_app/core/app/widgets/field_label.dart';
 import 'package:ecommerce_admin_app/core/app/widgets/form_buttons_row.dart';
 import 'package:ecommerce_admin_app/core/app/widgets/rounded_button.dart';
 import 'package:ecommerce_admin_app/core/app/widgets/titled_drop_down_field.dart';
@@ -30,6 +31,7 @@ class _ProductFormState extends State<ProductForm> {
   late final TextEditingController descriptionController;
   List<File?> images = [];
   int? selectedCategoryId;
+  bool? isActive;
 
   bool get nameChanged =>
       !widget.isCreate &&
@@ -42,16 +44,20 @@ class _ProductFormState extends State<ProductForm> {
   bool get categoryChanged =>
       !widget.isCreate && widget.product?.category.id != selectedCategoryId;
 
-  bool get imageChanged => images.isNotEmpty;
-
   bool get descriptionChanged =>
       !widget.isCreate &&
       widget.product?.description?.trim() != descriptionController.text.trim();
+
+  bool get isActiveChanged =>
+      !widget.isCreate && widget.product?.isActive != isActive;
+
+  bool get imageChanged => images.isNotEmpty;
 
   bool get nothingChanged =>
       !nameChanged &&
       !priceChanged &&
       !categoryChanged &&
+      !isActiveChanged &&
       !descriptionChanged &&
       !imageChanged;
 
@@ -65,6 +71,9 @@ class _ProductFormState extends State<ProductForm> {
     descriptionController = TextEditingController(
       text: widget.product?.description ?? '',
     );
+
+    isActive = widget.product?.isActive ?? true;
+
     selectedCategoryId = widget.product?.category.id;
   }
 
@@ -155,6 +164,21 @@ class _ProductFormState extends State<ProductForm> {
               });
             },
           ),
+
+          /// Active Switch (only for Edit)
+          if (!isCreate) ...[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const FieldLabel(title: 'Status Active', required: false),
+                Switch(
+                  value: isActive!,
+                  onChanged: (val) => setState(() => isActive = val),
+                  activeColor: Colours.success,
+                ),
+              ],
+            ),
+          ],
           TitledInputField(
             controller: descriptionController,
             title: 'Description',
@@ -233,6 +257,9 @@ class _ProductFormState extends State<ProductForm> {
                           updates['category_id'] = selectedCategoryId;
                         }
                         if (imageChanged) updates['images'] = images;
+                        if (isActiveChanged) {
+                          updates['is_active'] = isActive;
+                        }
                         if (descriptionChanged) {
                           updates['description'] =
                               descriptionController.text.trim();

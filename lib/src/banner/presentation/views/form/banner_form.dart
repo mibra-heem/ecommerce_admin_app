@@ -97,14 +97,14 @@ class _BannerFormState extends State<BannerForm> {
                       image != null
                           ? ClipRRect(
                             borderRadius: BorderRadius.circular(12),
-                            child: Image.file(image!, fit: BoxFit.cover),
+                            child: Image.file(image!, fit: BoxFit.fill),
                           )
                           : imageUrl != null
                           ? ClipRRect(
                             borderRadius: BorderRadius.circular(12),
                             child: CachedNetworkImage(
                               imageUrl: imageUrl!,
-                              fit: BoxFit.cover,
+                              fit: BoxFit.fill,
                             ),
                           )
                           : const Center(

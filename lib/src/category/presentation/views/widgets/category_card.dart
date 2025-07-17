@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce_admin_app/core/app/resources/colours.dart';
 import 'package:ecommerce_admin_app/core/app/widgets/card_buttons_row.dart';
+import 'package:ecommerce_admin_app/core/constants/api_const.dart';
 import 'package:ecommerce_admin_app/core/extensions/context_extension.dart';
 import 'package:ecommerce_admin_app/src/category/domain/entities/category.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +43,7 @@ class CategoryCard extends StatelessWidget {
             child:
                 category.icon != null
                     ? CachedNetworkImage(
-                      imageUrl: category.icon!,
+                      imageUrl: ApiConst.baseUrl + category.icon!,
                       height: 50,
                       width: 50,
                       fit: BoxFit.cover,

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:ecommerce_admin_app/core/app/resources/colours.dart';
+import 'package:ecommerce_admin_app/core/app/widgets/field_label.dart';
 import 'package:ecommerce_admin_app/core/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
@@ -40,10 +41,7 @@ class _AddImageFieldState extends State<AddImageField> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    widget.hintText!,
-                    style: context.theme.textTheme.titleSmall,
-                  ),
+                  FieldLabel(title: widget.hintText!, required: false,),
                   const Text(
                     'Square image recommended - maximum size 2MB',
                     style: TextStyle(color: Colours.grey600, fontSize: 12),

@@ -8,6 +8,7 @@ import 'package:ecommerce_admin_app/core/app/widgets/form_buttons_row.dart';
 import 'package:ecommerce_admin_app/core/app/widgets/rounded_button.dart';
 import 'package:ecommerce_admin_app/core/app/widgets/titled_drop_down_field.dart';
 import 'package:ecommerce_admin_app/core/app/widgets/titled_input_field.dart';
+import 'package:ecommerce_admin_app/core/constants/api_const.dart';
 import 'package:ecommerce_admin_app/core/extensions/context_extension.dart';
 import 'package:ecommerce_admin_app/src/category/data/models/category_model.dart';
 import 'package:ecommerce_admin_app/src/category/domain/entities/category.dart';
@@ -16,7 +17,6 @@ import 'package:ecommerce_admin_app/src/category/presentation/provider/category_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconly/iconly.dart';
-import 'package:image_picker/image_picker.dart';
 
 class CategoryForm extends StatefulWidget {
   const CategoryForm({required this.isCreate, this.category, super.key});
@@ -90,19 +90,10 @@ class _CategoryFormState extends State<CategoryForm> {
     super.dispose();
   }
 
-  Future<void> pickImage() async {
-    final picker = ImagePicker();
-    final file = await picker.pickImage(source: ImageSource.gallery);
-    if (file != null) {
-      setState(() => icon = File(file.path));
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final isCreate = widget.isCreate;
     final categories = context.read<CategoryProvider>().categories;
-    // final category = widget.category;
     return Form(
       key: formKey,
       child: Column(
@@ -167,7 +158,7 @@ class _CategoryFormState extends State<CategoryForm> {
                           ? ClipRRect(
                             borderRadius: BorderRadius.circular(12),
                             child: CachedNetworkImage(
-                              imageUrl: iconUrl!,
+                              imageUrl: ApiConst.baseUrl + iconUrl!,
                               fit: BoxFit.cover,
                             ),
                           )

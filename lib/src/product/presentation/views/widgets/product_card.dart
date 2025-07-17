@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce_admin_app/core/app/resources/colours.dart';
 import 'package:ecommerce_admin_app/core/app/widgets/app_dialog_box.dart';
 import 'package:ecommerce_admin_app/core/app/widgets/card_buttons_row.dart';
@@ -43,32 +44,10 @@ class ProductCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Product Image
-              ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: CachedNetworkImage(
-                  height: 70,
-                  width: 70,
-                  imageUrl:
-                      (product.images?.isNotEmpty ?? false)
-                          ? ApiConst.baseUrl + product.images!.first
-                          : '',
-                  fit: BoxFit.cover,
-                  placeholder:
-                      (context, url) => Container(
-                        height: 70,
-                        width: 70,
-                        alignment: Alignment.center,
-                        child: const CircularProgressIndicator(strokeWidth: 2),
-                      ),
-                  errorWidget:
-                      (_, imageUrl, _) => Container(
-                        height: 70,
-                        width: 70,
-                        color: Colours.grey200,
-                        alignment: Alignment.center,
-                        child: const Icon(Icons.image_not_supported),
-                      ),
-                ),
+              SizedBox(
+                height: 100,
+                width: 100,
+                child: buildImageSlider(product),
               ),
               const SizedBox(width: 14),
 
@@ -96,8 +75,8 @@ class ProductCard extends StatelessWidget {
                         fontSize: 12,
                         color:
                             context.isDarkMode
-                                ? Colors.grey[400]
-                                : Colors.grey[600],
+                                ? Colours.grey400
+                                : Colours.grey600,
                       ),
                     ),
                     const SizedBox(height: 6),
@@ -134,6 +113,28 @@ class ProductCard extends StatelessWidget {
                         ),
                       ],
                     ),
+                    const SizedBox(height: 6),
+
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color:
+                            index.isEven ? Colors.green[100] : Colors.red[100],
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Text(
+                        index.isEven ? 'In Stock' : 'Out of Stock',
+                        style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w700,
+                          color:
+                              index.isEven ? Colours.success : Colours.danger,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -154,7 +155,7 @@ class ProductCard extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
 
-          const SizedBox(height: 14),
+          const SizedBox(height: 6),
 
           // Action Buttons Row
           Row(
@@ -164,38 +165,20 @@ class ProductCard extends StatelessWidget {
               Row(
                 children: [
                   Icon(
-                    index.isOdd
+                    product.isActive
                         ? IconlyBold.tick_square
                         : IconlyBold.close_square,
-                    color: index.isOdd ? Colours.success : Colours.disable,
+                    color: product.isActive ? Colours.success : Colours.danger,
                     size: 18,
                   ),
                   const SizedBox(width: 6),
                   Text(
-                    index.isOdd ? 'Active' : 'Inactive',
+                    product.isActive ? 'Active' : 'Inactive',
                     style: TextStyle(
                       fontSize: 12,
-                      color: index.isOdd ? Colours.success : Colours.disable,
+                      color:
+                          product.isActive ? Colours.success : Colours.danger,
                       fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 4,
-                    ),
-                    decoration: BoxDecoration(
-                      color: index.isEven ? Colors.green[50] : Colors.red[50],
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    child: Text(
-                      index.isEven ? 'In Stock' : 'Out of Stock',
-                      style: TextStyle(
-                        fontSize: 11,
-                        fontWeight: FontWeight.w600,
-                        color: index.isEven ? Colours.success : Colours.danger,
-                      ),
                     ),
                   ),
                 ],
@@ -252,6 +235,45 @@ class ProductCard extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Widget buildImageSlider(Product product) {
+    if (product.images == null || product.images!.isEmpty) {
+      return Container(
+        height: 150,
+        alignment: Alignment.center,
+        color: Colours.grey200,
+        child: const Icon(Icons.image_not_supported, size: 40),
+      );
+    }
+
+    return CarouselSlider(
+      options: CarouselOptions(
+        viewportFraction: 1,
+        enableInfiniteScroll: product.images!.length > 1,
+        autoPlay: product.images!.length > 1,
+        autoPlayInterval: const Duration(seconds: 5),
+        autoPlayCurve: Curves.easeInOut,
+      ),
+      items:
+          product.images!.map((imgUrl) {
+            return ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: CachedNetworkImage(
+                imageUrl: ApiConst.baseUrl + imgUrl,
+                width: double.infinity,
+                fit: BoxFit.cover,
+                placeholder:
+                    (_, _) => const Center(child: CircularProgressIndicator()),
+                errorWidget:
+                    (_, _, _) => const ColoredBox(
+                      color: Colours.grey300,
+                      child: Icon(Icons.broken_image, color: Colours.grey600),
+                    ),
+              ),
+            );
+          }).toList(),
     );
   }
 }
