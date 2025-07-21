@@ -24,8 +24,8 @@ class ProductModel extends Product {
       category: CategoryModel.fromJson(data['category'] as SDMap),
       price: data['price'] as int,
       images:
-          data['images'] != null
-              ? List<String>.from(data['images'] as List)
+          data['image_urls'] != null
+              ? List<String>.from(data['image_urls'] as List<dynamic>)
               : null,
       description: data['description'] as String?,
       isActive: CoreUtils.toBoolean(data['is_active'] as int),
@@ -57,7 +57,7 @@ class ProductModel extends Product {
     return {
       'id': id,
       'name': name,
-      'images': images,
+      'image_urls': images,
       'category_id': category.id,
       'price': price,
       'description': description,

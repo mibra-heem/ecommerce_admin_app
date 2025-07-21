@@ -14,11 +14,11 @@ class ApiConst {
   static String baseUrl = dotenv.env['BASE_URL'] ?? '';
 
   // Banner Api's
-  static const bannersUrl = '/api/banners';
+  static const bannersUrl = '/api/admin/banners';
 
   // Category Api's
-  static const categoriesUrl = '/api/categories';
+  static const categoriesUrl = '/api/admin/categories';
 
   // Product Api's
-  static const productsUrl = '/api/products';
+  static const productsUrl = '/api/admin/products';
 }

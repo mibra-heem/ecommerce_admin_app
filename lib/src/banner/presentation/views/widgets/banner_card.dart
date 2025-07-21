@@ -5,7 +5,6 @@ import 'package:ecommerce_admin_app/core/constants/api_const.dart';
 import 'package:ecommerce_admin_app/core/extensions/context_extension.dart';
 import 'package:ecommerce_admin_app/src/banner/domain/entities/banner.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class BannerCard extends StatelessWidget {
   const BannerCard({
@@ -71,15 +70,15 @@ class BannerCard extends StatelessWidget {
                 imageUrl: ApiConst.baseUrl + banner.image,
                 height: 150,
                 width: double.infinity,
-                fit: BoxFit.cover,
+                fit: BoxFit.fill,
                 placeholder:
-                    (_, __) => Container(
+                    (_, _) => Container(
                       height: 150,
                       alignment: Alignment.center,
                       child: const CircularProgressIndicator(strokeWidth: 2),
                     ),
                 errorWidget:
-                    (_, __, ___) => Container(
+                    (_, _, _) => Container(
                       height: 150,
                       color: Colours.grey300,
                       alignment: Alignment.center,

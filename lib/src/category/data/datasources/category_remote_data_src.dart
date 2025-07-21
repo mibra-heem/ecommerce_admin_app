@@ -25,6 +25,8 @@ class CategoryRemoteDataSrcImpl implements CategoryRemoteDataSrc {
   @override
   Future<List<CategoryEntity>> getCategories() async {
     try {
+      debugPrint('Going to get the categories .......');
+
       final data = await _apiService.get(url: ApiConst.categoriesUrl);
 
       debugPrint('Categories Data : $data');

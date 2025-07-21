@@ -54,20 +54,23 @@ class ApiService implements BaseApiService {
   Future<SDMap> get({required String url, String? serverAccessToken}) async {
     final uri = Uri.parse(_baseUrl + url);
 
-    debugPrint('uri => $_baseUrl$url');
-
-    final response = await http.get(
-      uri,
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $serverAccessToken',
-      },
-    );
+    debugPrint('uri => $uri');
 
     try {
-      if (response.statusCode == 200) {
-        debugPrint('Request was successfull.');
+      final response = await http.get(
+        uri,
+        headers: {
+          'Content-Type': 'application/json',
+          if (serverAccessToken != null)
+            'Authorization': 'Bearer $serverAccessToken',
+        },
+      );
 
+      debugPrint('Response status: ${response.statusCode}');
+      debugPrint('Response body: ${response.body}');
+
+      if (response.statusCode == 200) {
+        debugPrint('Request was successful.');
         return jsonDecode(response.body) as SDMap;
       } else {
         throw ServerException(
@@ -75,8 +78,10 @@ class ApiService implements BaseApiService {
           statusCode: response.statusCode,
         );
       }
-    } on ServerException catch (e) {
-      throw ServerException(message: e.message, statusCode: e.statusCode);
+    } catch (e, s) {
+      debugPrint('HTTP GET error: $e');
+      debugPrintStack(stackTrace: s);
+      rethrow; // Let the caller handle it
     }
   }
 
@@ -154,7 +159,7 @@ class ApiService implements BaseApiService {
       if (response.statusCode == 200 || response.statusCode == 201) {
         debugPrint(response.body);
         return jsonDecode(response.body) as SDMap;
-      }else {
+      } else {
         debugPrint('Status Code :${response.statusCode}');
 
         debugPrint(response.body);
@@ -226,7 +231,6 @@ class ApiService implements BaseApiService {
         debugPrint('PATCH Request was successfull.');
         debugPrint(response.body);
 
-
         return jsonDecode(response.body) as SDMap;
       } else {
         debugPrint(response.body);
@@ -266,7 +270,6 @@ class ApiService implements BaseApiService {
       } else {
         // debugPrint(response.body);
         debugPrint('statusCode : ${response.statusCode}');
-
 
         throw ServerException(
           message: 'DELETE request failed.',

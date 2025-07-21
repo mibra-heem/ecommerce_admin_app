@@ -96,9 +96,7 @@ class ViewModalBottomSheet extends StatelessWidget {
             // ✅ Product Name & ID
             Text(
               product.name,
-              style: context.text.headlineSmall?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+              style: context.text.titleLarge,
             ),
             Text(
               'ID: ${product.id}',

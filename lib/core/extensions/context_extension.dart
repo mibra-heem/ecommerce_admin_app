@@ -9,14 +9,6 @@ extension ContextExtension<T> on BuildContext {
   ColorScheme get color => theme.colorScheme;
   TextTheme get text => theme.textTheme;
 
-  T ext<T extends ThemeExtension<T>>() {
-    final extension = theme.extension<T>();
-    if (extension == null) {
-      throw FlutterError('Missing ThemeExtension of type $T');
-    }
-    return extension;
-  }
-
   MediaQueryData get mediaQuery => MediaQuery.of(this);
   Size get size => mediaQuery.size;
   double get height => size.height;

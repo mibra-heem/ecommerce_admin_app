@@ -59,11 +59,7 @@ class ProductCard extends StatelessWidget {
                     // Product Name
                     Text(
                       product.name,
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: context.isDarkMode ? Colors.white : Colors.black,
-                      ),
-                      maxLines: 2,
+                      style: Theme.of(context).textTheme.titleMedium,
                       overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 4),
@@ -71,13 +67,7 @@ class ProductCard extends StatelessWidget {
                     // Product ID
                     Text(
                       'ID: ${product.id}',
-                      style: TextStyle(
-                        fontSize: 12,
-                        color:
-                            context.isDarkMode
-                                ? Colours.grey400
-                                : Colours.grey600,
-                      ),
+                      style: context.text.labelSmall,
                     ),
                     const SizedBox(height: 6),
 
@@ -92,46 +82,24 @@ class ProductCard extends StatelessWidget {
                             color: Colours.primaryLight,
                           ),
                         ),
-                        const SizedBox(width: 10),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 4,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colours.primaryLight.withAlpha(22),
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                          child: Text(
-                            product.category.name,
-                            style: const TextStyle(
-                              fontSize: 12,
-                              color: Colours.primary,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
                       ],
                     ),
                     const SizedBox(height: 6),
-
                     Container(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 8,
                         vertical: 4,
                       ),
                       decoration: BoxDecoration(
-                        color:
-                            index.isEven ? Colors.green[100] : Colors.red[100],
+                        color: Colours.primaryLight.withAlpha(22),
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: Text(
-                        index.isEven ? 'In Stock' : 'Out of Stock',
-                        style: TextStyle(
-                          fontSize: 11,
-                          fontWeight: FontWeight.w700,
-                          color:
-                              index.isEven ? Colours.success : Colours.danger,
+                        product.category.name,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: Colours.primary,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
@@ -179,6 +147,25 @@ class ProductCard extends StatelessWidget {
                       color:
                           product.isActive ? Colours.success : Colours.danger,
                       fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
+                    decoration: BoxDecoration(
+                      color: index.isEven ? Colors.green[100] : Colors.red[100],
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: Text(
+                      index.isEven ? 'In Stock' : 'Out of Stock',
+                      style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w700,
+                        color: index.isEven ? Colours.success : Colours.danger,
+                      ),
                     ),
                   ),
                 ],

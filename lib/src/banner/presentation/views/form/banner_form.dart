@@ -5,6 +5,7 @@ import 'package:ecommerce_admin_app/core/app/resources/colours.dart';
 import 'package:ecommerce_admin_app/core/app/utils/core_utils.dart';
 import 'package:ecommerce_admin_app/core/app/widgets/form_buttons_row.dart';
 import 'package:ecommerce_admin_app/core/app/widgets/rounded_button.dart';
+import 'package:ecommerce_admin_app/core/constants/api_const.dart';
 import 'package:ecommerce_admin_app/core/extensions/context_extension.dart';
 import 'package:ecommerce_admin_app/src/banner/data/models/banner_model.dart';
 import 'package:ecommerce_admin_app/src/banner/domain/entities/banner.dart';
@@ -103,7 +104,7 @@ class _BannerFormState extends State<BannerForm> {
                           ? ClipRRect(
                             borderRadius: BorderRadius.circular(12),
                             child: CachedNetworkImage(
-                              imageUrl: imageUrl!,
+                              imageUrl: ApiConst.baseUrl +  imageUrl!,
                               fit: BoxFit.fill,
                             ),
                           )

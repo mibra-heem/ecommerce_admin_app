@@ -2,7 +2,6 @@ import 'package:ecommerce_admin_app/core/app/resources/colours.dart';
 import 'package:ecommerce_admin_app/core/app/resources/fonts.dart';
 import 'package:ecommerce_admin_app/core/app/themes/app_color_scheme.dart';
 import 'package:ecommerce_admin_app/core/app/themes/app_input_decoration_theme.dart';
-import 'package:ecommerce_admin_app/core/app/themes/app_product_card_theme.dart';
 import 'package:ecommerce_admin_app/core/app/themes/app_text_theme.dart';
 import 'package:ecommerce_admin_app/core/app/themes/my_app_bar_theme.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +23,6 @@ class AppTheme {
     scaffoldBackgroundColor: Colours.scaffoldLight,
     textTheme: AppTextTheme.light,
     appBarTheme: MyAppBarTheme.light,
-    extensions: const [AppProductCardTheme.light],
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         surfaceTintColor: Colours.white,
@@ -73,7 +71,6 @@ class AppTheme {
     scaffoldBackgroundColor: Colours.scaffoldDark,
     splashFactory: NoSplash.splashFactory,
     textTheme: AppTextTheme.dark,
-    extensions: const [AppProductCardTheme.dark],
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         surfaceTintColor: Colours.grey900,

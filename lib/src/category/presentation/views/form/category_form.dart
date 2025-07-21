@@ -49,7 +49,8 @@ class _CategoryFormState extends State<CategoryForm> {
   bool get iconChanged => !widget.isCreate && icon != null;
 
   bool get categoryTypeChanged =>
-      !widget.isCreate && widget.category?.parentId != selectedParentId;
+      !widget.isCreate &&
+      categoryType != (widget.category?.parentId == null ? 0 : 1);
 
   bool get parentIdChanged =>
       !widget.isCreate && widget.category?.parentId != selectedParentId;
@@ -61,6 +62,7 @@ class _CategoryFormState extends State<CategoryForm> {
       !nameChanged &&
       !iconChanged &&
       !parentIdChanged &&
+      !categoryTypeChanged &&
       !isActiveChanged &&
       !descriptionChanged;
 
@@ -324,8 +326,10 @@ class _CategoryFormState extends State<CategoryForm> {
                         if (iconChanged) {
                           updates['icon'] = icon;
                         }
-                        if (parentIdChanged) {
+                        if (parentIdChanged && categoryType == 1) {
                           updates['parent_id'] = selectedParentId;
+                        }else if(categoryType == 0){
+                          updates['parent_id'] = null;
                         }
                         if (isActiveChanged) {
                           updates['is_active'] = isActive;

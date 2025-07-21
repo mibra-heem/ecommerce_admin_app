@@ -10,14 +10,22 @@ class AppTextTheme {
       fontSize: 24,
       fontWeight: FontWeight.w500,
     ),
-    titleMedium: TextStyle(
-      color: Colours.grey600,
-      fontWeight: FontWeight.w500,
+    titleLarge: TextStyle(
+      color: Colours.black,
+      fontWeight: FontWeight.bold,
       overflow: TextOverflow.ellipsis,
     ),
-    labelSmall: TextStyle(
-      color: Colours.grey700,
+    titleMedium: TextStyle(
+      color: Colours.black,
+      fontWeight: FontWeight.bold,
       overflow: TextOverflow.ellipsis,
+    ),
+    titleSmall: TextStyle(
+      color: Colours.grey600,
+      fontWeight: FontWeight.w400,
+    ),
+    labelSmall: TextStyle(
+      color: Colours.grey600,
     ),
   );
 
@@ -28,20 +36,28 @@ class AppTextTheme {
       fontWeight: FontWeight.w500,
     ),
     bodyLarge: TextStyle(color: Colours.grey100),
-    labelLarge: TextStyle(color: Colours.grey600),
-    titleSmall: TextStyle(color: Colours.grey100, fontWeight: FontWeight.w500),
+    titleLarge: TextStyle(
+      color: Colours.white,
+      fontWeight: FontWeight.bold,
+      overflow: TextOverflow.ellipsis,
+    ),
     titleMedium: TextStyle(
-      color: Colours.grey600,
-      fontWeight: FontWeight.w500,
+      color: Colours.white,
+      fontWeight: FontWeight.bold,
       overflow: TextOverflow.ellipsis,
     ),
-    labelSmall: TextStyle(
+    titleSmall: TextStyle(
       color: Colours.grey500,
-      overflow: TextOverflow.ellipsis,
+      fontWeight: FontWeight.w400,
     ),
+    labelLarge: TextStyle(color: Colours.grey600),
     labelMedium: TextStyle(
       color: Colours.grey100,
       overflow: TextOverflow.ellipsis,
     ),
+    labelSmall: TextStyle(
+      color: Colours.grey400,
+    ),
+    
   );
 }

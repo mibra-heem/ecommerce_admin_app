@@ -1,4 +1,4 @@
-package com.example.ecommerce_admin_app
+package com.example.mohart_admin
 
 import io.flutter.embedding.android.FlutterActivity
 

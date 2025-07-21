@@ -35,8 +35,10 @@ class ProductRemoteDataSrcImpl implements ProductRemoteDataSrc {
           .map((product) => ProductModel.fromJson(product as SDMap))
           .toList();
     } on ServerException catch (e) {
+      debugPrint('ServerException: ${e.message}, Code: ${e.statusCode}');
       throw ServerException(message: e.message, statusCode: e.statusCode);
     } catch (e, s) {
+      debugPrint('Unknown error occurred: $e');
       debugPrintStack(stackTrace: s);
       throw UnknownException(message: e.toString());
     }
