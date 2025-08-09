@@ -96,7 +96,9 @@ class ViewModalBottomSheet extends StatelessWidget {
             // ✅ Product Name & ID
             Text(
               product.name,
-              style: context.text.titleLarge,
+              style: context.text.titleLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
             ),
             Text(
               'ID: ${product.id}',
@@ -113,7 +115,7 @@ class ViewModalBottomSheet extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Rs. ${product.price}',
+                  '\$${product.price}',
                   style: const TextStyle(
                     fontSize: 18,
                     color: Colours.primaryLight,

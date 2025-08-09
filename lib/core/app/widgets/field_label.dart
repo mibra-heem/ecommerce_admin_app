@@ -21,7 +21,9 @@ class FieldLabel extends StatelessWidget {
         RichText(
           text: TextSpan(
             text: title,
-            style: context.theme.textTheme.titleSmall,
+            style: context.theme.textTheme.titleSmall?.copyWith(
+              fontWeight: FontWeight.w600,
+            ),
             children:
                 !required
                     ? null

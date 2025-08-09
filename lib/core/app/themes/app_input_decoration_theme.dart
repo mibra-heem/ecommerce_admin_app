@@ -37,7 +37,7 @@ class AppInputDecorationTheme {
       letterSpacing: 1,
       fontWeight: FontWeight.w500,
     ),
-    hintStyle: TextStyle(color: Colours.grey600),
+    hintStyle: TextStyle(color: Colours.grey400),
     focusedBorder: OutlineInputBorder(borderSide: BorderSide.none),
     border: OutlineInputBorder(borderSide: BorderSide.none),
     enabledBorder: OutlineInputBorder(borderSide: BorderSide.none),

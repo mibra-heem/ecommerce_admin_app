@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce_admin_app/core/app/resources/colours.dart';
 import 'package:ecommerce_admin_app/core/app/utils/core_utils.dart';
+import 'package:ecommerce_admin_app/core/app/widgets/field_label.dart';
 import 'package:ecommerce_admin_app/core/app/widgets/form_buttons_row.dart';
 import 'package:ecommerce_admin_app/core/app/widgets/rounded_button.dart';
 import 'package:ecommerce_admin_app/core/constants/api_const.dart';
@@ -65,11 +66,13 @@ class _BannerFormState extends State<BannerForm> {
           const SizedBox(height: 16),
 
           /// Image Upload
-          Text('Banner Image', style: context.text.titleSmall),
-          Text(
+          const FieldLabel(title: 'Banner Image'),
+          const Text(
             'Rectangle image 2:1 (1024x512) recommended. '
             'And max size should be 2MB.',
-            style: context.text.labelSmall?.copyWith(
+            style: TextStyle(
+              fontSize: 11,
+              color: Colours.grey600,
               overflow: TextOverflow.clip,
             ),
           ),
@@ -91,7 +94,7 @@ class _BannerFormState extends State<BannerForm> {
                   height: 180,
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: Colours.grey200,
+                    color: context.color.surfaceDim,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child:
@@ -104,7 +107,7 @@ class _BannerFormState extends State<BannerForm> {
                           ? ClipRRect(
                             borderRadius: BorderRadius.circular(12),
                             child: CachedNetworkImage(
-                              imageUrl: ApiConst.baseUrl +  imageUrl!,
+                              imageUrl: ApiConst.baseUrl + imageUrl!,
                               fit: BoxFit.fill,
                             ),
                           )

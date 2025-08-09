@@ -41,10 +41,17 @@ class _AddImageFieldState extends State<AddImageField> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  FieldLabel(title: widget.hintText!, required: false,),
+                  FieldLabel(
+                    title: widget.hintText!,
+                    required: false,
+                    // suffixIcon: const Icon(Icons.photo),
+                  ),
                   const Text(
                     'Square image recommended - maximum size 2MB',
-                    style: TextStyle(color: Colours.grey600, fontSize: 12),
+                    style: TextStyle(
+                      color: Colours.grey600,
+                      fontSize: 11,
+                    ),
                   ),
                 ],
               ),
@@ -85,7 +92,7 @@ class _AddImageFieldState extends State<AddImageField> {
                 children: [
                   const Text(
                     'Added Images',
-                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(right: 25),

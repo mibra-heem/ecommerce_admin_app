@@ -33,7 +33,7 @@ class TitledDropDownField extends StatelessWidget {
           isExpanded: true,
           value: selectedId,
           padding: const EdgeInsets.only(left: 8),
-          hint: Text('Electronics', style: context.theme.textTheme.titleMedium),
+          hint: const Text('Electronics'),
           style: context.theme.textTheme.bodyLarge,
           borderRadius: BorderRadius.circular(20),
           menuMaxHeight: 200,

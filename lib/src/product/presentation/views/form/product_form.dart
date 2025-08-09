@@ -186,7 +186,7 @@ class _ProductFormState extends State<ProductForm> {
                 'Earbuds Pro 1.O is light & perfect fit for your'
                 ' ears ...',
             maxLength: 1200,
-            maxLines: 6,
+            maxLines: 4,
             counterStyle: const TextStyle(
               color: Colours.primaryLight,
               letterSpacing: 1,

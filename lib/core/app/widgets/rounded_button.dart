@@ -33,7 +33,7 @@ class RoundedButton extends StatelessWidget {
         backgroundColor: buttonColor ?? context.color.onSecondary,
         foregroundColor: labelColor ?? Colours.grey100,
         padding: padding,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(90)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
       child: Text(
         label,

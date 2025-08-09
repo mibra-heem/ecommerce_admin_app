@@ -122,7 +122,7 @@ class _CategoryFormState extends State<CategoryForm> {
           const SizedBox(height: 20),
 
           /// Image Upload
-          Text('Category Image', style: context.text.titleSmall),
+          const FieldLabel(title: 'Category Image', required: false,),
           Text(
             'Square image (512x512) recommended. And max size should be 2MB.',
             style: context.text.labelSmall?.copyWith(
@@ -147,7 +147,7 @@ class _CategoryFormState extends State<CategoryForm> {
                   height: 120,
                   width: 120,
                   decoration: BoxDecoration(
-                    color: Colours.grey200,
+                    color: context.color.surfaceDim,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child:

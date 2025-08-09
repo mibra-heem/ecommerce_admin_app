@@ -20,13 +20,9 @@ class AppTextTheme {
       fontWeight: FontWeight.bold,
       overflow: TextOverflow.ellipsis,
     ),
-    titleSmall: TextStyle(
-      color: Colours.grey600,
-      fontWeight: FontWeight.w400,
-    ),
-    labelSmall: TextStyle(
-      color: Colours.grey600,
-    ),
+    bodySmall: TextStyle(color: Colours.grey900),
+    titleSmall: TextStyle(color: Colours.grey900),
+    labelSmall: TextStyle(color: Colours.grey500),
   );
 
   static const dark = TextTheme(
@@ -36,6 +32,7 @@ class AppTextTheme {
       fontWeight: FontWeight.w500,
     ),
     bodyLarge: TextStyle(color: Colours.grey100),
+    bodySmall: TextStyle(color: Colours.grey100),
     titleLarge: TextStyle(
       color: Colours.white,
       fontWeight: FontWeight.bold,
@@ -46,18 +43,12 @@ class AppTextTheme {
       fontWeight: FontWeight.bold,
       overflow: TextOverflow.ellipsis,
     ),
-    titleSmall: TextStyle(
-      color: Colours.grey500,
-      fontWeight: FontWeight.w400,
-    ),
+    titleSmall: TextStyle(color: Colours.grey100),
     labelLarge: TextStyle(color: Colours.grey600),
     labelMedium: TextStyle(
       color: Colours.grey100,
       overflow: TextOverflow.ellipsis,
     ),
-    labelSmall: TextStyle(
-      color: Colours.grey400,
-    ),
-    
+    labelSmall: TextStyle(color: Colours.grey600),
   );
 }

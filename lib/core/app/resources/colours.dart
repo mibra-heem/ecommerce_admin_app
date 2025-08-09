@@ -28,7 +28,7 @@ class Colours {
   static const black = Color(0xFF000000);
   static const grey = Color(0xFF9E9E9E);
 
-  // Shades
+  // Grey Shades
   static const grey100 = Color(0xFFF5F5F5);
   static const grey200 = Color(0xFFEEEEEE);
   static const grey300 = Color(0xFFE0E0E0);
@@ -39,6 +39,19 @@ class Colours {
   static const grey800 = Color(0xFF424242);
   static const grey900 = Color(0xFF212121);
 
+  // App Colors
+  static const surfaceDark = Color(0xFF121212);
+  static const surfaceDarkDim = Color(0xFF121212);
+  static const surfaceDarkBright = Color(0xFF121212);
+  static const surfaceDarkContainer = Color(0xFF121212);
+  static const onSurfaceDark = Color(0xFF121212);
+
+  static const surfaceLight = Color(0xFEEFEFEE);
+  static const surfaceLightDim = Color(0xFEEFEFEE);
+  static const surfaceLightBright = Color(0xFFFFFFFF);
+  static const surfaceLightContainer = Color(0xFFFFFFFF);
+  static const onSurfaceLight = Color(0xFF212121);
+
   static const textFieldLight = Color(0xFFDADADA);
   static const textFieldDark = Color(0xFF1E1E1E);
 
@@ -46,8 +59,8 @@ class Colours {
   static const scaffoldDark = Color(0xFF121212);
 
   static const Color appBarLight = primary;
-  // static const appBarDark = Color(0xFF1C1C1C);
-  static const Color appBarDark = primary;
+  static const appBarDark = Color(0xFF1C1C1C);
+  // static const Color appBarDark = primary;
 
   static const navBarLight = Color(0xFFF7F7F7);
   static const navBarDark = Color(0xFF181818);

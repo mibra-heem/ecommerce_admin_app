@@ -59,7 +59,9 @@ class ProductCard extends StatelessWidget {
                     // Product Name
                     Text(
                       product.name,
-                      style: Theme.of(context).textTheme.titleMedium,
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                       overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 4),
@@ -75,7 +77,7 @@ class ProductCard extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          'Rs. ${product.price}',
+                          '\$${product.price}',
                           style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
